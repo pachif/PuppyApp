@@ -1,0 +1,640 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Main</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <!--<link href="Content/bootstrap-theme.css" rel="stylesheet" />-->
+    <!-- Custom CSS -->
+    <link href="Content/sb-admin.css" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="Content/morris.css" rel="stylesheet">
+    <!-- Map Library Styles -->
+    <link href="Content/timeline.css" rel="stylesheet" />
+    <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet' />-->
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <!-- Custom Fonts -->
+    <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .media-body span {
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="main.html">Pupzy</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="http://placehold.it/50x50" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading">
+                                            <strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <img class="img-circle" src="http://placehold.it/24x24" alt=""> John Smith <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="landing.html"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="main.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript: showPane(this, 'petpane');"><i class="fa fa-paw"></i> Manage Pets</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript: showPane(this, 'explopane');"><i class="fa fa-globe"></i> Explore Map</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="fade in" id="dashpane">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Dashboard <small>Overview</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-dashboard"></i> Dashboard
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-comments fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">26</div>
+                                            <div>New Messages!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-toggle="modal" data-target="#soonModal">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                            <div class="panel panel-green">
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-3">
+                                            <i class="fa fa-tasks fa-5x"></i>
+                                        </div>
+                                        <div class="col-xs-9 text-right">
+                                            <div class="huge">12</div>
+                                            <div>New Events!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <a href="#" data-toggle="modal" data-target="#soonModal">
+                                    <div class="panel-footer">
+                                        <span class="pull-left">View Details</span>
+                                        <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Map Row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-yellow">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-globe"></i> Map Activity</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div id="activityMap" style="height:400px">
+                                        <!--Maps Goes Here-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-red">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Comunity Recent Events</h3>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="list-group">
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">just now</span>
+                                            <i class="fa fa-fw fa-bullhorn"></i> More recent activity on {Country} Area
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">4 minutes ago</span>
+                                            <i class="fa fa-fw fa-comment"></i> 635 New messages send
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">23 minutes ago</span>
+                                            <i class="fa fa-fw fa-bolt"></i> Another event was added in <b>Dog</b> category
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">1 hour ago</span>
+                                            <i class="fa fa-fw fa-user"></i> A new user joined the comunity
+                                        </a>
+                                        <a href="#" class="list-group-item">
+                                            <span class="badge">1 hour ago</span>
+                                            <i class="fa fa-fw fa-bullhorn"></i> More recent activity on {Country} Area
+                                        </a>
+                                    </div>
+                                    <div class="text-right">
+                                        <a href="#" data-toggle="modal" data-target="#soonModal">
+                                            View All Activity
+                                            <i class="fa fa-arrow-circle-right"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                </div>
+
+                <div id="petpane" class="hide fade">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Your Pack <small>Details</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-paw"></i> Manage Pets
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="alert alert-info alert-dismissable hide">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <i class="fa fa-info-circle"></i>  <strong>Changes saved successfully</strong>
+                                <!--Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="petName">Pet Name</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" id="petName" placeholder="Name goes here">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="birthDatePet">Birthdate</label>
+                                    <div class="col-lg-9">
+                                        <input type="date" class="form-control" id="birthDatePet">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="categPet">Pet Category</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" id="categPet">
+                                            <option class="item">Dogs</option>
+                                            <option class="item">Cats</option>
+                                            <option class="item">Other</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-8">
+                                        <button onclick="javascript: addPet(this);" class="btn">Add</button>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="form-group-select">Your Pets</label>
+                                    <div class="col-lg-9">
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">Pet Name 1</h4>
+                                                        Category: <span>Dog</span><br />
+                                                        BirthDate: <span>Thursday 14, April, 2015</span>
+                                                    </div>
+                                                    <div class="media-right">
+                                                        <div>
+                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
+                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                        </div>
+                                                        <img class="img-circle media-object" />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">Pet Name 2</h4>
+                                                        Category: <span>Dog</span><br />
+                                                        BirthDate: <span>Thursday 14, April, 2015</span>
+                                                    </div>
+                                                    <div class="media-right ">
+                                                        <div>
+                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
+                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                        </div>
+                                                        <img class="img-circle media-object" />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="list-group-item">
+                                                <div class="media">
+                                                    <div class="media-body">
+                                                        <h4 class="media-heading">Pet Name 3</h4>
+                                                        Category: <span>Cat</span><br />
+                                                        BirthDate: <span>Thursday 14, May, 2015</span>
+                                                    </div>
+                                                    <div class="media-right ">
+                                                        <div>
+                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
+                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                        </div>
+                                                        <img class="img-circle media-object" />
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Buttons -->
+                                <div class="col-lg-offset-1 col-lg-10">
+                                    <hr />
+                                    <div class="pull-right">
+                                        <button class="btn ">Discard</button>
+                                        <button style="margin-left:10px" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+                <div id="explopane" class="hide fade">
+                    <!-- Page Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Map <small>Discover what's up in your Area</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-map-o"></i> Explore Map
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div id="exploreMap" style="min-height:450px; margin:10px" class="panel-body">
+                                    <!--Maps Goes Here-->
+                                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3670785.033068472!2d-60.895492749999995!3d-26.0417017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1460598569334" width="1200" height="1024" frameborder="0" style="border:0"></iframe>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.container-fluid -->
+                </div>
+                <!-- /#page-wrapper -->
+            </div>
+        </div>
+    </div>
+    <!-- Soon Modal -->
+    <div id="soonModal" class="modal fade" role="dialog" aria-labelledby="soonModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="soonModalLabel">Feature</h4>
+                </div>
+                <div class="modal-body">
+                    <h1>Coming Soon</h1>
+                    <h2><i class="fa fa-smile-o"></i></h2>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- History Modal -->
+    <div id="historyModal" class="modal fade" role="dialog" aria-labelledby="historyModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="historyModalLabel">History</h4>
+                </div>
+                <div class="modal-body">
+                    <ul class="timeline">
+                        <li>
+                            <div class="timeline-badge">
+                                <i class="fa fa-paw"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                    <p>
+                                        <small class="text-muted"><i class="fa fa-clock-o"></i> 11 hours ago via Twitter</small>
+                                    </p>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Libero laboriosam dolor perspiciatis omnis exercitationem. Beatae, officia pariatur? Est cum veniam excepturi. Maiores praesentium, porro voluptas suscipit facere rem dicta, debitis.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="timeline-inverted">
+                            <div class="timeline-badge success">
+                                <i class="fa fa-check"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem dolorem quibusdam, tenetur commodi provident cumque magni voluptatem libero, quis rerum. Fugiat esse debitis optio, tempore. Animi officiis alias, officia repellendus.</p>
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laudantium maiores odit qui est tempora eos, nostrum provident explicabo dignissimos debitis vel! Adipisci eius voluptates, ad aut recusandae minus eaque facere.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="timeline-badge info">
+                                <i class="fa fa-lightbulb-o"></i>
+                            </div>
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <h4 class="timeline-title">Lorem ipsum dolor</h4>
+                                </div>
+                                <div class="timeline-body">
+                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus numquam facilis enim eaque, tenetur nam id qui vel velit similique nihil iure molestias aliquam, voluptatem totam quaerat, magni commodi quisquam.</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <!--<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>-->
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
+    
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/scrollTo.js"></script>
+    <!-- Morris Charts JavaScript -->
+    <!--<script src="js/plugins/morris/raphael.min.js"></script>
+    <script src="js/plugins/morris/morris.min.js"></script>
+    <script src="js/plugins/morris/morris-data.js"></script>-->
+    <script>
+        L.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
+        var map = L.map('activityMap').setView([-55.915, -27.36], 15).addLayer(L.mapbox.tileLayer('mapbox.streets'));
+
+        //var mapAct = new mapboxgl.Map({
+        //    container: 'activityMap', // container id
+        //    style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+        //    center: [-55.915,-27.36], // get user profile as starting position
+        //    zoom: 15 // starting zoom
+        //});
+
+        var geojsonFeatures = {
+            "type": "FeatureCollection",
+            "features": [
+               {
+                   "type": "Feature",
+                   "geometry": {
+                       "type": "Point",
+                       "coordinates": [
+                          -55.910,
+                          -27.46
+                       ]
+                   },
+                   "properties": {
+                       "icon": "value0",
+                       "title": "This is event 1"
+                   }
+               },
+               {
+                   "type": "Feature",
+                   "geometry": {
+                       "type": "Point",
+                       "coordinates": [-55.910, -27.26]
+                   },
+                   "properties": {
+                       "prop0": "value0",
+                       "title": "This is event 2"
+                   }
+               }, {
+                   "type": "Feature",
+                   "geometry": {
+                       "type": "Point",
+                       "coordinates": [-55.900, -27.26]
+                   },
+                   "properties": {
+                       "prop0": "value0",
+                       "title": "This is event 3"
+                   }
+               },
+            ]
+        };
+
+        L.geoJson(geojsonFeatures).addTo(map);
+
+    </script>
+    <script>
+        function showExploreMap() {
+            var mapAct = new mapboxgl.Map({
+                container: 'exploreMap', // container id
+                style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+                center: [-55.915, -27.36], // starting position
+                zoom: 13 // starting zoom
+            });
+        }
+
+        function showPane(source, strPane) {
+            // set this element as active
+            var leftMenuButton = $(source);
+            var liel = leftMenuButton.parents("li");
+            liel.parent().children(".active").removeClass("active");
+            liel.addClass("active");
+            // fade out all the panels
+            var paneEl = $("#" + strPane);
+            paneEl.parent().children(".fade.in").removeClass("in").addClass("hide");
+            // fade in the curren one
+            $("#" + strPane).removeClass("hide").addClass("in");
+            // Show Map
+            showExploreMap();
+            // scroll to top
+            scrollTo(document.documentElement, 0, 500);
+            // On mobile colapse menu
+            $(".navbar-ex1-collapse").collapse('toggle');
+        }
+
+        function addPet(source) {
+            var petName = $("petName").text();
+            var birthDate = $("birthDatePet").text();
+            var categ = $("categPet").find("option:selected").text();
+
+            event.preventDefault();
+        }
+
+        function removePet(source) {
+            var removeButton = $(source);
+            // fade out this element
+            var li = removeButton.parents("li:first");
+            setTimeout(function () {
+                li.remove();
+            }, 500);
+            li.addClass('fade');
+            event.preventDefault();
+        }
+
+        $(document).ready(function () {
+            
+        });
+    </script>
+</body>
+</html>

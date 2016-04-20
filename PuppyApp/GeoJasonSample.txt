@@ -1,0 +1,40 @@
+﻿{
+   "type":"FeatureCollection",
+   "features":[
+      {
+         "type":"Feature",
+         "geometry":{
+            "type":"Point",
+            "coordinates":[
+               -55.910,
+               - 27.46
+            ]
+         },
+         "properties":{
+            "icon":"value0",
+            "title": "This is event 1"
+         }
+      },
+      {
+         "type":"Feature",
+         "geometry":{
+            "type":"Point",
+            "coordinates":[-55.910,-27.26]
+         },
+         "properties":{
+            "prop0":"value0"
+            "title": "This is event 2"
+         }
+      },{
+         "type":"Feature",
+         "geometry":{
+            "type":"Point",
+            "coordinates":[-55.900,-27.26]
+         },
+         "properties":{
+            "prop0":"value0"
+            "title": "This is event 3"
+         }
+      },
+   ]
+}

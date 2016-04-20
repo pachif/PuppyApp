@@ -1,0 +1,287 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Puppy App Template</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body style="width:100%;height:100%">
+    <div>
+        <nav class="navbar navbar-default navbar-inverse" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Pupzy</a>
+                    <button type="button" style="color: white" class="navbar-toggle">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="glyphicon glyphicon-log-in"></span>
+                    </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a data-toggle="modal" data-target="#loginModal" href="#">Login</a></li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-offset-2 col-lg-8">
+                    <div class="jumbotron">
+                        <h1>Thanks for joining our comunity</h1>
+                        <p>If you are already registered please check Login. If not push button below to start your registration</p>
+                        <button class="btn btn-lg btn-primary" onclick="javascript: showWizzard();">Register Now!</button>
+                    </div>
+                </div>
+            </div><div class="row">
+                <div class="col-lg-offset-2 col-lg-8">
+
+                </div>
+            </div>
+            <div id="wizzard-div" class="row hidden">
+                <div class="col-lg-offset-2 col-lg-8">
+                    <div class="thumbnail">
+                        <p class="text-center">
+                            <ul id="wizzard" role="tablist" class="pagination pagination-lg">
+                                <li class="active"><a id="credentials" class="disabled" aria-controls="credentials-tab" role="tab" data-toggle="tab" href="#credentials-tab">Your Credentials </a></li>
+                                <li><a id="profile" class="disabled" aria-controls="profile-tab" role="tab" data-toggle="tab" href="#profile-tab"> Profile </a></li>
+                                <li><a id="pet" class="disabled" aria-controls="pet-tab" role="tab" data-toggle="tab" href="#pet-tab"> Pets</a></li>
+                                <li><a id="confirm" class="disabled" aria-controls="confirm-tab" role="tab" data-toggle="tab" href="#confirm-tab">Confirm</a></li>
+                            </ul>
+                        </p>
+                        <div class="caption">
+                            <div>
+                                <div class="tab-content">
+                                    <div id="credentials-tab" aria-labelledby="credentials" role="tabpanel" class="tab-pane active">
+                                        <p>
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="exampleInputEmail1">Email address</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="exampleInputPassword1">Password</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-8">
+                                                        <div class="checkbox">
+                                                            <label>
+                                                                <input type="checkbox"> Remember me
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-8">
+                                                        <button class="btn btn-primary">Login Facebook</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div id="profile-tab" aria-labelledby="profile" role="tabpanel" class="tab-pane">
+                                        <p>
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="nickName">Nick Name</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="nickName">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="birthDateOwner">Birthdate</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="birthDateOwner">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="address">Address</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="address">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="address">Map</label>
+                                                    <div class="col-sm-8">
+                                                        <!--Show Map Control-->
+                                                        <div class="panel panel-default">
+                                                            <div style="min-height:210px" class="panel-body">
+                                                                <div id="profileMap" style="width:100%;height:200px">
+                                                                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3670785.033068472!2d-60.895492749999995!3d-26.0417017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1460598569334" width="400" height="200" frameborder="0" style="border:0"></iframe>-->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div id="pet-tab" role="tabpanel" class="tab-pane fade" aria-labelledby="pet">
+                                        <p>
+                                            <div class="form-horizontal">
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="petName">Pet Name</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="text" class="form-control" id="petName" placeholder="Name goes here">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="birthDatePet">Birthdate</label>
+                                                    <div class="col-sm-8">
+                                                        <input type="date" class="form-control" id="birthDatePet">
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="form-group-select">Pet Category</label>
+                                                    <div class="col-sm-8">
+                                                        <select class="form-control" id="form-group-select">
+                                                            <option class="item">Dogs</option>
+                                                            <option class="item">Cats</option>
+                                                            <option class="item">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="col-sm-offset-2 col-sm-8 text-right">
+                                                        <button id="addPet" class="btn btn-success">Add</button>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label" for="form-group-select">Your Pets</label>
+                                                    <div class="col-sm-8">
+                                                        <ul class="list-group">
+                                                            <li id="lonely-li" class="list-group-item">Its lonlely here!</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <div id="confirm-tab" role="tabpanel" class="tab-pane text-center fade" aria-labelledby="confirm">
+                                        <h1>That's All</h1>
+                                        <h3>
+                                            The initial setup is done. Confirm your data and we will be redirected.
+                                        </h3><h4>Now you can enjoy the application you can now retrieve results from map. Also see most common desease in areas.</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <p>
+                                <button id="previousButton" class="btn disabled">Previous</button>
+                                <a id="confirmButton" class="btn btn-primary pull-right hide"
+                                   data-loading-text="Submiting Data ..." autocomplete="off"
+                                   href="#">Confirm</a>
+                                <button id="nextButton" class="btn pull-right">Next</button>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModal-label" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="loginModal-label">Access</h4>
+                </div>
+                <div class="modal-body">
+                    <h3 class="text-center">Welcome!</h3>
+                    <button class="btn btn-block btn-primary">Login to Facebook</button>
+                </div>
+                <!--<div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save</button>
+                </div>-->
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="Scripts/jquery-1.10.2.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="Scripts/bootstrap.js"></script>
+    <script src="Scripts/mapUtils.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmOozCD46ssYIxD23O9FAeXLT0fcj5IDI&callback=initMap">
+    </script>
+    <script>
+        function showWizzard() {
+            $('.jumbotron').addClass('hidden');
+            $('#wizzard-div').removeClass('hidden');
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('profileMap'), {
+                center: { lat: -34.397, lng: 150.644 },
+                zoom: 8
+            });
+        }
+
+        $(document).ready(function () {
+            
+            var $tabs = $('#wizzard li');
+
+            $('#confirmButton').on('click', function () {
+                //
+                $(this).button('loading');
+                setTimeout(function () {
+                    $('#confirmButton').button('toggle');
+                    window.location = "main.html";
+                }, 1500);
+            });
+
+            $('#previousButton').on('click', function () {
+                //
+                if ($('#previousButton').hasClass("disabled")) {
+                    return;
+                }
+                // move to the current tab
+                var prevTabs = $tabs.filter('.active').prev('li');
+                prevTabs.find('a[data-toggle="tab"]').tab('show');
+            });
+
+            $('#nextButton').click(function (e) {
+                // move to the current tab
+                var nextTabs = $tabs.filter('.active').next('li');
+                nextTabs.find('a[data-toggle="tab"]').tab('show');
+            });
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                var activeTabs = $tabs.filter('.active');
+
+                // enable or disable the previous button
+                var prevTabs = activeTabs.prev('li');
+                if (prevTabs.length == 0) {
+                    $('#previousButton').addClass("disabled");
+                } else {
+                    $('#previousButton').removeClass("disabled");
+                }
+                // calculate the next if there is not then show confirm button
+                var nextTabs = activeTabs.next('li');
+                if (nextTabs.length == 0) {
+                    $('#confirmButton').removeClass("hide");
+                    $('#nextButton').addClass("hide");
+                } else {
+                    $('#nextButton').removeClass("hide");
+                    $('#confirmButton').addClass("hide");
+                }
+            });
+
+            $('#wizzard a').click(function (e) {
+                e.preventDefault()
+            })
+        });
+    </script>
+</body>
+</html>
