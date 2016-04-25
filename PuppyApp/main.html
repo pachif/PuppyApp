@@ -12,13 +12,14 @@
     <!--<link href="Content/bootstrap-theme.css" rel="stylesheet" />-->
     <!-- Custom CSS -->
     <link href="Content/sb-admin.css" rel="stylesheet">
-
+    <link href="Content/timeline.css" rel="stylesheet" />
     <!-- Morris Charts CSS -->
     <link href="Content/morris.css" rel="stylesheet">
     <!-- Map Library Styles -->
-    <link href="Content/timeline.css" rel="stylesheet" />
-    <!--<link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.css' rel='stylesheet' />-->
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
+    <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
+
     <!-- Custom Fonts -->
     <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -518,73 +519,95 @@
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="Scripts/jquery-1.10.2.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
-    <!--<script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>-->
-    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.17.0/mapbox-gl.js'></script>
-    
     <script src="Scripts/bootstrap.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
+    <!-- Custom JavaScript -->
     <script src="Scripts/scrollTo.js"></script>
-    <!-- Morris Charts JavaScript -->
-    <!--<script src="js/plugins/morris/raphael.min.js"></script>
-    <script src="js/plugins/morris/morris.min.js"></script>
-    <script src="js/plugins/morris/morris-data.js"></script>-->
     <script>
-        L.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
-        var map = L.map('activityMap').setView([-55.915, -27.36], 15).addLayer(L.mapbox.tileLayer('mapbox.streets'));
+        L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
+        var map = L.mapbox.map('activityMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+            .setView([-27.36616489612778, -55.89320182800293], 15);
 
-        //var mapAct = new mapboxgl.Map({
-        //    container: 'activityMap', // container id
-        //    style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
-        //    center: [-55.915,-27.36], // get user profile as starting position
-        //    zoom: 15 // starting zoom
-        //});
+        var addressPoints = [
+            [-27.369633084667676, -55.893845558166504, "This is event 1"],
+            [-27.369594973296245, -55.886893272399895, "This is event 2"],
+            [-27.37138619356735, -55.88725805282593, "This is event 3"],
+        ];
 
-        var geojsonFeatures = {
-            "type": "FeatureCollection",
-            "features": [
-               {
-                   "type": "Feature",
-                   "geometry": {
-                       "type": "Point",
-                       "coordinates": [
-                          -55.910,
-                          -27.46
-                       ]
-                   },
-                   "properties": {
-                       "icon": "value0",
-                       "title": "This is event 1"
-                   }
-               },
-               {
-                   "type": "Feature",
-                   "geometry": {
-                       "type": "Point",
-                       "coordinates": [-55.910, -27.26]
-                   },
-                   "properties": {
-                       "prop0": "value0",
-                       "title": "This is event 2"
-                   }
-               }, {
-                   "type": "Feature",
-                   "geometry": {
-                       "type": "Point",
-                       "coordinates": [-55.900, -27.26]
-                   },
-                   "properties": {
-                       "prop0": "value0",
-                       "title": "This is event 3"
-                   }
-               },
-            ]
-        };
+        var markers = new L.MarkerClusterGroup();
 
-        L.geoJson(geojsonFeatures).addTo(map);
+        for (var i = 0; i < addressPoints.length; i++) {
+            var a = addressPoints[i];
+            var title = a[2];
+            var marker = L.marker(new L.LatLng(a[0], a[1]), {
+                icon: L.mapbox.marker.icon({ 'marker-symbol': 'dog-park', "marker-size": "large", 'marker-color': '#FF8000' }),
+                title: title
+            });
+            marker.bindPopup(title);
+            markers.addLayer(marker);
+        }
 
+        map.addLayer(markers);
     </script>
     <script>
+        function loadGeoJasonData() {
+            // data
+            var geojsonFeatures = {
+                "type": "FeatureCollection",
+                "features": [
+                   {
+                       "type": "Feature",
+                       "geometry": {
+                           "type": "Point",
+                           "coordinates": [-55.893845558166504, -27.369633084667676]
+                       },
+                       "properties": {
+                           "title": "This is event 1",
+                           "category": "cat",
+                           "marker-color": "#FF8000",
+                           "marker-size": "large",
+                           "marker-symbol": "zoo"
+                       }
+                   },
+                   {
+                       "type": "Feature",
+                       "geometry": {
+                           "type": "Point",
+                           "coordinates": [-55.886893272399895, -27.369594973296245]
+                       },
+                       "properties": {
+                           "marker-color": "#FF8000",
+                           "marker-size": "large",
+                           "marker-symbol": "dog-park",
+                           "category": "dog",
+                           "title": "This is event 2"
+                       }
+                   }, {
+                       "type": "Feature",
+                       "geometry": {
+                           "type": "Point",
+                           "coordinates": [-55.88725805282593, -27.37138619356735]
+                       },
+                       "properties": {
+                           "marker-color": "#FF8000",
+                           "marker-size": "large",
+                           "marker-symbol": "dog-park",
+                           "category": "dog",
+                           "title": "This is event 3"
+                       }
+                   },
+                ]
+            };
+            // processing
+            for (var i = 0; i < geojsonFeatures.features.length; i++) {
+                var marker = L.geoJson(geojsonFeatures.features[i]);
+                marker.bindPopup(marker.properties.title);
+                markers.addLayer(marker);
+            }
+        }
+
         function showExploreMap() {
             var mapAct = new mapboxgl.Map({
                 container: 'exploreMap', // container id
@@ -633,7 +656,7 @@
         }
 
         $(document).ready(function () {
-            
+
         });
     </script>
 </body>
