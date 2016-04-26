@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
-
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
     <!--<link href="Content/bootstrap-theme.css" rel="stylesheet" />-->
     <!-- Custom CSS -->
@@ -102,7 +101,7 @@
                             </a>
                         </li>
                         <li class="message-footer">
-                            <a href="#">Read All New Messages</a>
+                            <a href="#" data-toggle="modal" data-target="#soonModal">Read All New Messages</a>
                         </li>
                     </ul>
                 </li>
@@ -129,7 +128,7 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="#">View All</a>
+                            <a href="#" data-toggle="modal" data-target="#soonModal">View All</a>
                         </li>
                     </ul>
                 </li>
@@ -139,7 +138,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#" data-toggle="modal" data-target="#soonModal"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -155,10 +154,16 @@
                         <a href="main.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     </li>
                     <li>
-                        <a onclick="javascript: showPane(this, 'petpane');"><i class="fa fa-paw"></i> Manage Pets</a>
+                        <a onclick="javascript: showPane(this, 'explopane');"><i class="fa fa-fw fa-globe"></i> Explore Map</a>
                     </li>
                     <li>
-                        <a onclick="javascript: showPane(this, 'explopane');"><i class="fa fa-globe"></i> Explore Map</a>
+                        <a href="#" data-toggle="modal" data-target="#soonModal"><i class="fa fa-fw fa-bar-chart"></i> Manage Charts</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript: showPane(this, 'eventpane');"><i class="fa fa-fw fa-clock-o"></i> Manage Events</a>
+                    </li>
+                    <li>
+                        <a onclick="javascript: showPane(this, 'petpane');"><i class="fa fa-fw fa-paw"></i> Manage Pets</a>
                     </li>
                 </ul>
             </div>
@@ -286,7 +291,7 @@
                 </div>
 
                 <div id="petpane" class="hide fade">
-                    <!-- Page Heading -->
+                    <!-- Pane Heading -->
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
@@ -299,7 +304,7 @@
                             </ol>
                         </div>
                     </div>
-                    <!-- /.row -->
+                    <!-- Pane Section 1 -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-info alert-dismissable hide">
@@ -309,7 +314,7 @@
                             </div>
                         </div>
                     </div>
-                    <!-- /.row -->
+                    <!-- Pane Section 2 -->
                     <div class="row">
                         <div class="col-lg-offset-1 col-lg-10">
                             <form class="form-horizontal">
@@ -408,6 +413,76 @@
 
                     </div>
                 </div>
+
+                <div id="eventpane" class="hide fade">
+                    <!-- Pane Heading -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-header">
+                                Your Pack <small>Details</small>
+                            </h1>
+                            <ol class="breadcrumb">
+                                <li class="active">
+                                    <i class="fa fa-clock-o"></i> Add new Events
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                    <!-- Pane Body -->
+                    <div class="row">
+                        <div class="col-lg-offset-1 col-lg-10">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="eventTitle">Title</label>
+                                    <div class="col-lg-9">
+                                        <input type="text" class="form-control" id="eventTitle" placeholder="brief description">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="eventWhen">When</label>
+                                    <div class="col-lg-9">
+                                        <input type="date" class="form-control" id="eventWhen">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="categPet">Your Pets</label>
+                                    <div class="col-lg-9">
+                                        <select class="form-control" id="categPet">
+                                            <option class="item">Pet Name 1</option>
+                                            <option class="item">Pet Name 2</option>
+                                            <option class="item">Pet Name 3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="eventWhen">Location</label>
+                                    <div class="col-lg-9">
+                                        <input type="date" class="form-control" id="eventLocation">
+                                    </div>
+                                </div>   
+                                <!-- Map Help -->      
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="eventWhen">Preview Location</label>
+                                    <div class="col-lg-9">
+                                        <div id="eventMapInput" style="height:150px">
+                                            <!--Maps Goes Here-->
+                                        </div>
+                                    </div>
+                                </div>                
+                                <!-- Buttons -->
+                                <div class="col-lg-offset-1 col-lg-10">
+                                    <hr />
+                                    <div class="pull-right">
+                                        <button class="btn ">Discard</button>
+                                        <button style="margin-left:10px" class="btn btn-primary">Save Changes</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
                 <div id="explopane" class="hide fade">
                     <!-- Page Heading -->
                     <div class="row">
@@ -434,7 +509,7 @@
                     </div>
                     <!-- /.container-fluid -->
                 </div>
-                <!-- /#page-wrapper -->
+                
             </div>
         </div>
     </div>
@@ -526,34 +601,31 @@
     <!-- Custom JavaScript -->
     <script src="Scripts/scrollTo.js"></script>
     <script>
-        L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
-        var map = L.mapbox.map('activityMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
-            .setView([-27.36616489612778, -55.89320182800293], 15);
+        function getMarkers() {
+            var addressPoints = [
+                [-27.369633084667676, -55.893845558166504, "This is event 1"],
+                [-27.369594973296245, -55.886893272399895, "This is event 2"],
+                [-27.37138619356735, -55.88725805282593, "This is event 3"],
+            ];
 
-        var addressPoints = [
-            [-27.369633084667676, -55.893845558166504, "This is event 1"],
-            [-27.369594973296245, -55.886893272399895, "This is event 2"],
-            [-27.37138619356735, -55.88725805282593, "This is event 3"],
-        ];
+            var markers = new L.MarkerClusterGroup();
 
-        var markers = new L.MarkerClusterGroup();
+            for (var i = 0; i < addressPoints.length; i++) {
+                var a = addressPoints[i];
+                var title = a[2];
+                var marker = L.marker(new L.LatLng(a[0], a[1]), {
+                    icon: L.mapbox.marker.icon({ 'marker-symbol': 'dog-park', "marker-size": "large", 'marker-color': '#FF8000' }),
+                    title: title
+                });
+                marker.bindPopup(title);
+                markers.addLayer(marker);
+            }
 
-        for (var i = 0; i < addressPoints.length; i++) {
-            var a = addressPoints[i];
-            var title = a[2];
-            var marker = L.marker(new L.LatLng(a[0], a[1]), {
-                icon: L.mapbox.marker.icon({ 'marker-symbol': 'dog-park', "marker-size": "large", 'marker-color': '#FF8000' }),
-                title: title
-            });
-            marker.bindPopup(title);
-            markers.addLayer(marker);
+            return markers;
         }
 
-        map.addLayer(markers);
-    </script>
-    <script>
         function loadGeoJasonData() {
-            // data
+            // geoJason approach
             var geojsonFeatures = {
                 "type": "FeatureCollection",
                 "features": [
@@ -608,13 +680,18 @@
             }
         }
 
+        function showEventMap() {
+            var map = L.mapbox.map('eventMapInput', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+                            .setView([-27.36616489612778, -55.89320182800293], 13);
+        }
+
         function showExploreMap() {
-            var mapAct = new mapboxgl.Map({
-                container: 'exploreMap', // container id
-                style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
-                center: [-55.915, -27.36], // starting position
-                zoom: 13 // starting zoom
-            });
+            var map = L.mapbox.map('exploreMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+                            .setView([-27.36616489612778, -55.89320182800293], 13);
+
+            var markers = getMarkers();
+
+            map.addLayer(markers);
         }
 
         function showPane(source, strPane) {
@@ -629,7 +706,12 @@
             // fade in the curren one
             $("#" + strPane).removeClass("hide").addClass("in");
             // Show Map
-            showExploreMap();
+            if (strPane == 'explopane') {
+                showExploreMap();
+            } else if (strPane == 'eventpane') {
+                showEventMap();
+            }
+            
             // scroll to top
             scrollTo(document.documentElement, 0, 500);
             // On mobile colapse menu
@@ -656,7 +738,13 @@
         }
 
         $(document).ready(function () {
+            L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
+            var map = L.mapbox.map('activityMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+                .setView([-27.36616489612778, -55.89320182800293], 15);
 
+            var markers = getMarkers();
+
+            map.addLayer(markers);
         });
     </script>
 </body>

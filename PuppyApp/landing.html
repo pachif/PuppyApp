@@ -5,11 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Puppy App Template</title>
-
+    <!-- Bootstrap -->
     <link href="Content/bootstrap.min.css" rel="stylesheet" />
-
+    <!-- Map Library Styles -->
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+            background-image: url('img/dexter-blur.jpg');
+        }
+    </style>
 </head>
-<body style="width:100%;height:100%">
+<body style="">
     <div>
         <nav class="navbar navbar-default navbar-inverse" role="navigation">
             <div class="container-fluid">
@@ -38,7 +46,8 @@
                         <button class="btn btn-lg btn-primary" onclick="javascript: showWizzard();">Register Now!</button>
                     </div>
                 </div>
-            </div><div class="row">
+            </div>
+            <div class="row">
                 <div class="col-lg-offset-2 col-lg-8">
 
                 </div>
@@ -49,9 +58,9 @@
                         <p class="text-center">
                             <ul id="wizzard" role="tablist" class="pagination pagination-lg">
                                 <li class="active"><a id="credentials" class="disabled" aria-controls="credentials-tab" role="tab" data-toggle="tab" href="#credentials-tab">Your Credentials </a></li>
-                                <li><a id="profile" class="disabled" aria-controls="profile-tab" role="tab" data-toggle="tab" href="#profile-tab"> Profile </a></li>
-                                <li><a id="pet" class="disabled" aria-controls="pet-tab" role="tab" data-toggle="tab" href="#pet-tab"> Pets</a></li>
-                                <li><a id="confirm" class="disabled" aria-controls="confirm-tab" role="tab" data-toggle="tab" href="#confirm-tab">Confirm</a></li>
+                                <li class="disabled"><a id="profile" class="disabled" aria-controls="profile-tab" role="tab" data-toggle="tab" href="#profile-tab"> Profile </a></li>
+                                <li class="disabled"><a id="pet" class="disabled" aria-controls="pet-tab" role="tab" data-toggle="tab" href="#pet-tab"> Pets</a></li>
+                                <li class="disabled"><a id="confirm" class="disabled" aria-controls="confirm-tab" role="tab" data-toggle="tab" href="#confirm-tab">Confirm</a></li>
                             </ul>
                         </p>
                         <div class="caption">
@@ -116,8 +125,7 @@
                                                         <!--Show Map Control-->
                                                         <div class="panel panel-default">
                                                             <div style="min-height:210px" class="panel-body">
-                                                                <div id="profileMap" style="width:100%;height:200px">
-                                                                    <!--<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3670785.033068472!2d-60.895492749999995!3d-26.0417017!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sar!4v1460598569334" width="400" height="200" frameborder="0" style="border:0"></iframe>-->
+                                                                <div id="profileMap" style="height:200px">
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -210,26 +218,34 @@
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="Scripts/jquery-1.10.2.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="Scripts/bootstrap.js"></script>
-    <script src="Scripts/mapUtils.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmOozCD46ssYIxD23O9FAeXLT0fcj5IDI&callback=initMap">
-    </script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     <script>
+        var map;
+
+        function initMap() {
+            //map = new google.maps.Map(document.getElementById('profileMap'), {
+            //    center: { lat: -34.397, lng: 150.644 },
+            //    zoom: 8
+            //});
+
+            L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
+
+            map = L.mapbox.map('profileMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+                .setView([-27.36616489612778, -55.89320182800293], 15);
+
+        }
+
         function showWizzard() {
             $('.jumbotron').addClass('hidden');
             $('#wizzard-div').removeClass('hidden');
         }
 
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('profileMap'), {
-                center: { lat: -34.397, lng: 150.644 },
-                zoom: 8
-            });
-        }
-
         $(document).ready(function () {
             
+
             var $tabs = $('#wizzard li');
 
             $('#confirmButton').on('click', function () {
@@ -257,8 +273,17 @@
                 nextTabs.find('a[data-toggle="tab"]').tab('show');
             });
 
+            $('#wizzard li.disabled > a[data-toggle=tab]').on('click', function (e) {
+                e.stopImmediatePropagation();
+            });
+
             $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
                 var activeTabs = $tabs.filter('.active');
+                activeTabs.removeClass('disabled');
+
+                if (activeTabs[0].innerText.trim() == 'Profile' && !map) {
+                    initMap();
+                }
 
                 // enable or disable the previous button
                 var prevTabs = activeTabs.prev('li');
@@ -276,6 +301,8 @@
                     $('#nextButton').removeClass("hide");
                     $('#confirmButton').addClass("hide");
                 }
+
+                validButton = false;
             });
 
             $('#wizzard a').click(function (e) {
