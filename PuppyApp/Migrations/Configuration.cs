@@ -37,7 +37,7 @@ namespace PuppyApp.Migrations {
                     Id = 301,
                     Title = "Death",
                     When = DateTime.Now.AddYears(-3),
-                    Location = new Location(-27, -54),
+                    Location = new Location(-27.369633084667676, -55.893845558166504),
                     PetId = 201,
                     IllnessId = 401
                 },
@@ -45,7 +45,7 @@ namespace PuppyApp.Migrations {
                     Id = 301,
                     Title = "Death",
                     When = DateTime.Now.AddYears(-3),
-                    Location = new Location(-27, -54),
+                    Location = new Location(-27.369594973296245, -55.886893272399895),
                     PetId = 202,
                     IllnessId = 402
                 }

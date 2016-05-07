@@ -8,12 +8,12 @@ namespace PuppyApp.Models {
             // In order to let code first entity framework
         }
 
-        public Location(decimal latitude, decimal longitude) {
+        public Location(double latitude, double longitude) {
             Latitude = latitude;
             Longitude = longitude;
         }
 
-        public decimal Latitude { get; set; }
-        public decimal Longitude { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }

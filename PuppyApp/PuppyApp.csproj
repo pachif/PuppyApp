@@ -184,6 +184,10 @@
     <Compile Include="Migrations\201604032132496_Initial.Designer.cs">
       <DependentUpon>201604032132496_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201605062046081_Initial1.cs" />
+    <Compile Include="Migrations\201605062046081_Initial1.Designer.cs">
+      <DependentUpon>201605062046081_Initial1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntityObject.cs" />
     <Compile Include="Models\Desease.cs" />
@@ -270,6 +274,7 @@
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\jquery.bootstrap.wizard.js" />
@@ -279,6 +284,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Sites References.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -304,6 +310,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201604032132496_Initial.resx">
       <DependentUpon>201604032132496_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201605062046081_Initial1.resx">
+      <DependentUpon>201605062046081_Initial1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

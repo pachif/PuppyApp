@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using PuppyApp.DTOS;
 using PuppyApp.Models;
 
 namespace PuppyApp.Controllers
@@ -21,6 +22,13 @@ namespace PuppyApp.Controllers
         public IQueryable<HistoryPoint> GetHistoryPoints()
         {
             return db.HistoryPoints;
+        }
+
+        [Route("api/HistoryPoints/Recent")]
+        public IQueryable<HistoryGeoJsonDTO> GetRecentHistory()
+        {
+            var result = AutoMapperConfig.AppMapper.Map<HistoryPoint[], HistoryGeoJsonDTO[]>(db.HistoryPoints.ToArray());
+            return result.AsQueryable();
         }
 
         // GET: api/HistoryPoints/5

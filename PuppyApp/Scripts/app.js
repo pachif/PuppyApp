@@ -1,31 +1,52 @@
-﻿var profileViewModel = function () {
-    var self = this;
-    self.profiles = ko.observableArray();
-    self.error = ko.observable();
+﻿/// <reference path="jquery-1.10.2.min.js" />
+/// <reference path="knockout-3.4.0.js" />
 
-    self.newProfile = {
+(function (ko, ok) {
+    ko.BaseViewModel = function () {
+        var self = this;
+
+        this.apiUrl = 'api/default';
+        self.newItem = ko.observable();
+        self.error = ko.observable();
+        self.items = ko.observableArray();
+        self.dirtyItems = ko.computed(function () {
+            return self.items().filter(function (item) {
+                return item.dirtyFlag.isDirty();
+            });
+        });
+        self.isDirty = ko.computed(function () {
+            return self.dirtyItems().length > 0;
+        });
+        
+        self.ajaxHelper = function (uri, method, data) {
+            self.error(''); // Clear error message
+            return $.ajax({
+                type: method,
+                url: uri,
+                dataType: 'json',
+                contentType: 'application/json',
+                data: data ? JSON.stringify(data) : null
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+                self.error(errorThrown);
+            });
+        }
+    };
+
+}(ko));
+
+var profileViewModel = function () {
+    self = this;
+    ko.BaseViewModel.call(self); // for base inheritance
+
+    this.profiles = ko.observableArray();
+
+    this.newProfile = {
         Id : ko.observable(),
         Name: ko.observable(),
         AddressLatitude: ko.observable(),
         AddressLongitude: ko.observable(),
         Photo : ko.observable()
-    }
-
-
-    var userProfilesUri = '/api/userprofiles/';
-
-    function ajaxHelper(uri, method, data) {
-        self.error(''); // Clear error message
-        return $.ajax({
-            type: method,
-            url: uri,
-            dataType: 'json',
-            contentType: 'application/json',
-            data: data ? JSON.stringify(data) : null
-        }).fail(function (jqXHR, textStatus, errorThrown) {
-            self.error(errorThrown);
-        });
-    }
+    };
 
     this.addProfile = function (formElement) {
         var profile = {
@@ -36,10 +57,15 @@
             Photo: self.newProfile.Photo()
         };
 
-        ajaxHelper(booksUri, 'POST', book).done(function (item) {
+        self.ajaxHelper(self.apiUrl, 'POST', book).done(function (item) {
             self.profiles.push(item);
         });
     };
+    // Initialize Here
+    this.apiUrl = '/api/userprofiles/';
+    self.newItem(this.newProfile);
 };
 
-ko.applyBindings(new profileViewModel());
+//$.extend(baseViewModel, profileViewModel);
+
+//ko.applyBindings(new profileViewModel());
