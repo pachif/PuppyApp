@@ -66,6 +66,13 @@ var profileViewModel = function () {
     self.newItem(this.newProfile);
 };
 
-//$.extend(baseViewModel, profileViewModel);
+function getLocation(positionAction) {
+    ///<summary>Calls the browser geolocalizations feature</summary>
+    ///<param name="positionAction"></param>
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(positionAction);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
 
-//ko.applyBindings(new profileViewModel());

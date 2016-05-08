@@ -16,9 +16,9 @@ namespace PuppyApp.Models {
         public Location Location { get; set; }
         [Required]
         public int PetId { get; set; }
-        public Pet Mascot { get; set; }
+        public virtual Pet Mascot { get; set; }
 
         public int IllnessId { get; set; }
-        public Desease Illness { get; set; }
+        public virtual Desease Illness { get; set; }
     }
 }

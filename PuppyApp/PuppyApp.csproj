@@ -175,7 +175,10 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\UserProfilesController.cs" />
+    <Compile Include="DTOS\ComboOptionsDTO.cs" />
     <Compile Include="DTOS\HistoryGeoJsonDTO.cs" />
+    <Compile Include="DTOS\HistoryPointDTO.cs" />
+    <Compile Include="DTOS\PetDTO.cs" />
     <Compile Include="DTOS\UserProfileDTO.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

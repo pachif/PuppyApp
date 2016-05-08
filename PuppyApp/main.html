@@ -187,7 +187,7 @@
                     </div>
                     <!-- /.row -->
                     <div class="row">
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-6 col-md-6">
                             <div class="panel panel-primary">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -209,7 +209,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-6 col-md-6">
                             <div class="panel panel-green">
                                 <div class="panel-heading">
                                     <div class="row">
@@ -441,10 +441,9 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="eventWhen">When</label>
                                     <div class="col-lg-9">
-                                        <!--<input type="date" class="form-control" id="eventWhen" >-->
-                                        <div class="datepicker fuelux" id="myDatepicker">
+                                        <div class="datepicker fuelux" id="eventWhenDatepicker">
                                             <div class="input-group">
-                                                <input class="form-control" id="myDatepickerInput" type="text" />
+                                                <input class="form-control" id="eventWhenInput" type="text" />
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                                         <span class="fa fw fa-calendar"></span>
@@ -527,15 +526,14 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="categPet">Your Pets</label>
                                     <div class="col-lg-9">
-                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="myCombobox">
+                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="petCombobox">
                                             <input type="text" class="form-control">
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                                                <ul class="dropdown-menu dropdown-menu-right">
-                                                    <li data-value="0"><a href="#">One</a></li>
-                                                    <li data-value="1"><a href="#">Pet Name 1</a></li>
-                                                    <li data-value="2"><a href="#">Pet Name 2</a></li>
-                                                    <li data-value="3"><a href="#">Pet Name 3</a></li>
+                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: pets">
+                                                    <li data-bind="attr: { 'data-value': PetId }" data-value="1">
+                                                        <a href="#"><span data-bind="text: Name"></span></a>
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -547,16 +545,26 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="eventWhen">Location</label>
+                                    <label class="col-lg-2 control-label" for="categPet">Desease</label>
                                     <div class="col-lg-9">
-                                        <input type="date" class="form-control" id="eventLocation">
+                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="deseaseCombobox">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
+                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: deseases">
+                                                    <li data-bind="attr: { 'data-value': Id }" data-value="1">
+                                                        <a href="#"><span data-bind="text: Title"></span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Map Help -->
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="eventWhen">Preview Location</label>
+                                    <label class="col-lg-2 control-label" for="eventWhen">Location</label>
                                     <div class="col-lg-9">
-                                        <div id="eventMapInput" style="height:150px">
+                                        <div id="eventMapInput" style="height:350px">
                                             <!--Maps Goes Here-->
                                         </div>
                                     </div>
@@ -720,68 +728,34 @@
             return markers;
         }
 
-        function loadGeoJasonData() {
-            // geoJason approach
-            var geojsonFeatures = {
-                "type": "FeatureCollection",
-                "features": [
-                   {
-                       "type": "Feature",
-                       "geometry": {
-                           "type": "Point",
-                           "coordinates": [-55.893845558166504, -27.369633084667676]
-                       },
-                       "properties": {
-                           "title": "This is event 1",
-                           "category": "cat",
-                           "marker-color": "#FF8000",
-                           "marker-size": "large",
-                           "marker-symbol": "zoo"
-                       }
-                   },
-                   {
-                       "type": "Feature",
-                       "geometry": {
-                           "type": "Point",
-                           "coordinates": [-55.886893272399895, -27.369594973296245]
-                       },
-                       "properties": {
-                           "marker-color": "#FF8000",
-                           "marker-size": "large",
-                           "marker-symbol": "dog-park",
-                           "category": "dog",
-                           "title": "This is event 2"
-                       }
-                   }, {
-                       "type": "Feature",
-                       "geometry": {
-                           "type": "Point",
-                           "coordinates": [-55.88725805282593, -27.37138619356735]
-                       },
-                       "properties": {
-                           "marker-color": "#FF8000",
-                           "marker-size": "large",
-                           "marker-symbol": "dog-park",
-                           "category": "dog",
-                           "title": "This is event 3"
-                       }
-                   },
-                ]
-            };
-            // processing
-            for (var i = 0; i < geojsonFeatures.features.length; i++) {
-                var marker = L.geoJson(geojsonFeatures.features[i]);
-                marker.bindPopup(marker.properties.title);
-                markers.addLayer(marker);
-            }
+        function showEventMap(point) {
+
+            var map = L.mapbox.map('eventMapInput', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
+                .setView(point, 13)
+                .addControl(L.mapbox.geocoderControl('mapbox.places', {
+                    autocomplete: true
+                }));
+
+            var marker = L.marker(point, {
+                icon: L.mapbox.marker.icon({
+                    'marker-color': '#f86767'
+                }),
+                draggable: true
+            }).addTo(map);
+
+            marker.on('dragend', function () {
+                var pos = marker.getLatLng();
+                alert('Latitude:' + pos.lat + '\nLongitude: ' + pos.lng);
+            });
         }
 
-        function showEventMap() {
-            var map = L.mapbox.map('eventMapInput', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
-                            .setView([-27.36616489612778, -55.89320182800293], 13);
+        function showPosition(position) {
+            x.innerHTML = "Latitude: " + position.coords.latitude +
+            "<br>Longitude: " + position.coords.longitude;
         }
 
         function showExploreMap() {
+
             var map = L.mapbox.map('exploreMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' }, zindex: 1})
                             .setView([-27.36616489612778, -55.89320182800293], 13);
 
@@ -790,7 +764,7 @@
             map.addLayer(markers);
         }
 
-        function showActivityMap() {
+        function showActivityMap(center) {
             var map = L.mapbox.map('activityMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
                 .setView([-27.36616489612778, -55.89320182800293], 15);
 
@@ -829,7 +803,10 @@
             if (strPane == 'explopane') {
                 showExploreMap();
             } else if (strPane == 'eventpane') {
-                showEventMap();
+                getLocation(function(position) {
+                    var point = [position.coords.latitude,position.coords.longitude];
+                    showEventMap(point);
+                });
             }
 
             // scroll to top
@@ -868,7 +845,7 @@
 
             showActivityMap();
             // another initialization
-            $('#myDatepicker').datepicker();
+            $('#eventWhenDatepicker').datepicker();
         });
     </script>
 </body>
