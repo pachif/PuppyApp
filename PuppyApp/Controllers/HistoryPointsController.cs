@@ -81,8 +81,9 @@ namespace PuppyApp.Controllers
 
         // POST: api/HistoryPoints
         [ResponseType(typeof(HistoryPoint))]
-        public async Task<IHttpActionResult> PostHistoryPoint(HistoryPoint historyPoint)
+        public async Task<IHttpActionResult> PostHistoryPoint(HistoryPointDTO historyPointDTO)
         {
+            HistoryPoint historyPoint = AutoMapperConfig.AppMapper.Map<HistoryPointDTO, HistoryPoint>(historyPointDTO);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

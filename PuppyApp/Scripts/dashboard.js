@@ -18,19 +18,18 @@ var dashboardViewModel = function () {
         });
     };
 
-    this.addNewEvent = function (formElement) {
-        var newEvent = self.newItem();
+    this.addNewEvent = function (eventData) {
+        //var newEvent = self.newItem();
+        //var historyPoint = {
+        //    Id: 0,
+        //    Title: formElement.eventTitle,
+        //    When: formElement.When,
+        //    PetId: formElement.PetId,
+        //    EventLatitude: formElement.PetId,
+        //    EventLongitude: formElement.EventLongitude
+        //};
 
-        var historyPoint = {
-            Id: 0,
-            Title: formElement.eventTitle,
-            When: formElement.When,
-            PetId: formElement.PetId,
-            EventLatitude: formElement.PetId,
-            EventLongitude: formElement.EventLongitude
-        };
-
-        self.ajaxHelper(self.apiUrl, 'POST', book).done(function (item) {
+        self.ajaxHelper(self.apiUrl, 'POST', eventData).done(function (item) {
             alert('Event Saved!');
             self.loadRecentEvents();
         });

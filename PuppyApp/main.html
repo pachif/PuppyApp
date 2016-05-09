@@ -431,7 +431,7 @@
                     <!-- Pane Body -->
                     <div class="row">
                         <div class="col-lg-offset-1 col-lg-10">
-                            <form class="form-horizontal">
+                            <div id="eventForm" class="form-horizontal">
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="eventTitle">Title</label>
                                     <div class="col-lg-9">
@@ -522,7 +522,6 @@
                                         </div>
                                     </div>
                                 </div>
-
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="categPet">Your Pets</label>
                                     <div class="col-lg-9">
@@ -568,16 +567,18 @@
                                             <!--Maps Goes Here-->
                                         </div>
                                     </div>
+                                    <input type="hidden" name="latitude" id="eventLat" />
+                                    <input type="hidden" name="longitude" id="eventLng" />
                                 </div>
                                 <!-- Buttons -->
                                 <div class="col-lg-offset-1 col-lg-10">
                                     <hr />
                                     <div class="pull-right">
-                                        <button class="btn ">Discard</button>
-                                        <button style="margin-left:10px" class="btn btn-primary">Save Changes</button>
+                                        <button id="discardEventButton" class="btn ">Discard</button>
+                                        <button id="saveEventButton" style="margin-left:10px" class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
                     </div>
@@ -745,13 +746,10 @@
 
             marker.on('dragend', function () {
                 var pos = marker.getLatLng();
-                alert('Latitude:' + pos.lat + '\nLongitude: ' + pos.lng);
+                $('#eventLat').val(pos.lat);
+                $('#eventLng').val(pos.lng);
+                //alert('Latitude:' + pos.lat + '\nLongitude: ' + pos.lng);
             });
-        }
-
-        function showPosition(position) {
-            x.innerHTML = "Latitude: " + position.coords.latitude +
-            "<br>Longitude: " + position.coords.longitude;
         }
 
         function showExploreMap() {
@@ -846,6 +844,28 @@
             showActivityMap();
             // another initialization
             $('#eventWhenDatepicker').datepicker();
+
+            $('#saveEventButton').click(function (ev) {
+                // Collect form data
+                var title = $('#eventTitle').val();
+                var when = $('#eventWhenDatepicker').datepicker('getDate');
+                var latitude = $('#eventLat').val();
+                var longitude = $('#eventLng').val();
+                var pet = $('#petCombobox').combobox('selectedItem');
+                var illness = $('#deseaseCombobox').combobox('selectedItem');
+
+                // Create Object
+                var objData = {
+                    "title": title,
+                    "when": when,
+                    "latitude": latitude,
+                    "longitude": longitude,
+                    "petid": pet.value,
+                    "illnessid": illness.value
+                }
+                // send it to MVVM
+                dashVM.addNewEvent(objData);
+            });
         });
     </script>
 </body>
