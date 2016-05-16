@@ -23,10 +23,25 @@ namespace PuppyApp {
                 .ForMember(d => d.Specie, opts => opts.MapFrom(src => src.Specie))
                 .ForMember(d => d.Photo, opts => opts.MapFrom(src => src.Photo));
 
+                
                 cfg.CreateMap<HistoryPoint, HistoryGeoJsonDTO>()
                 .ForMember(d => d.Title, opts => opts.MapFrom(src => src.Title))
                 .ForMember(d => d.Latitude, opts => opts.MapFrom(src => src.Location.Latitude))
                 .ForMember(d => d.Longitude, opts => opts.MapFrom(src => src.Location.Longitude));
+
+                cfg.CreateMap<HistoryPoint, HistoryPointDTO>()
+                //.ForMember(d => d.Title, opts => opts.MapFrom(src => src.Title))
+                //.ForMember(d => d.When, opts => opts.MapFrom(src => src.When))
+                .ForMember(d => d.PetId, opts => opts.MapFrom(src => src.PetId))
+                .ForMember(d => d.Latitude, opts => opts.MapFrom(src => src.Location.Latitude))
+                .ForMember(d => d.Longitude, opts => opts.MapFrom(src => src.Location.Longitude));
+
+                cfg.CreateMap<HistoryPointDTO, HistoryPoint>()
+                .ForMember(d => d.Title, opts => opts.MapFrom(src => src.Title))
+                .ForMember(d => d.When, opts => opts.MapFrom(src => src.When))
+                .ForMember(d => d.PetId, opts => opts.MapFrom(src => src.PetId))
+                .ForMember(d => d.Location, opts => opts.MapFrom(src => new Location(src.Latitude, src.Longitude)));
+                
             });
 
             //config.cre

@@ -18,21 +18,23 @@ var dashboardViewModel = function () {
         });
     };
 
-    this.addNewEvent = function (eventData) {
-        //var newEvent = self.newItem();
-        //var historyPoint = {
-        //    Id: 0,
-        //    Title: formElement.eventTitle,
-        //    When: formElement.When,
-        //    PetId: formElement.PetId,
-        //    EventLatitude: formElement.PetId,
-        //    EventLongitude: formElement.EventLongitude
-        //};
-
-        self.ajaxHelper(self.apiUrl, 'POST', eventData).done(function (item) {
-            alert('Event Saved!');
-            self.loadRecentEvents();
-        });
+    this.addNewEvent = function (eventData, successCallback, failCallback) {
+        ///<summary>Adds new HistoryPoint to database</summary>
+        ///<param name='eventData'>the DTO object</param>
+        ///<param name='successCallback'>method to call in success</param>
+        ///<param name='failCallback'>method to call in fail</param>
+        self.ajaxHelper(self.apiUrl, 'POST', eventData)
+            .done(function (data) {
+                self.loadRecentEvents();
+                if (successCallback != null) {
+                    successCallback();
+                }
+            })
+            .fail(function (data) {
+                if (failCallback != null) {
+                    failCallback();
+                }
+            });
     }
 
     function loadProfilePets(id) {

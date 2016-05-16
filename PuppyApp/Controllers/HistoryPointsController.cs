@@ -81,16 +81,16 @@ namespace PuppyApp.Controllers
 
         // POST: api/HistoryPoints
         [ResponseType(typeof(HistoryPoint))]
-        public async Task<IHttpActionResult> PostHistoryPoint(HistoryPointDTO historyPointDTO)
+        public IHttpActionResult PostHistoryPoint(HistoryPointDTO historyPointDTO)
         {
-            HistoryPoint historyPoint = AutoMapperConfig.AppMapper.Map<HistoryPointDTO, HistoryPoint>(historyPointDTO);
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
+            HistoryPoint historyPoint = AutoMapperConfig.AppMapper.Map<HistoryPointDTO, HistoryPoint>(historyPointDTO);
             db.HistoryPoints.Add(historyPoint);
-            await db.SaveChangesAsync();
+            db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = historyPoint.Id }, historyPoint);
         }

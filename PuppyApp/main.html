@@ -575,7 +575,10 @@
                                     <hr />
                                     <div class="pull-right">
                                         <button id="discardEventButton" class="btn ">Discard</button>
-                                        <button id="saveEventButton" style="margin-left:10px" class="btn btn-primary">Save Changes</button>
+                                        <button id="saveEventButton" 
+                                                data-loading-text="Submiting Data ..." 
+                                                style="margin-left:10px" 
+                                                class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
                             </div>
@@ -732,7 +735,7 @@
         function showEventMap(point) {
 
             var map = L.mapbox.map('eventMapInput', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
-                .setView(point, 13)
+                .setView(point, 15)
                 .addControl(L.mapbox.geocoderControl('mapbox.places', {
                     autocomplete: true
                 }));
@@ -843,9 +846,11 @@
 
             showActivityMap();
             // another initialization
-            $('#eventWhenDatepicker').datepicker();
+            var now = new Date();
+            $('#eventWhenDatepicker').datepicker({ retricted: [{ from : new Date(now.getFullYear() -5,1,1), to: new Date(now.getFullYear() + 5,12,31) }] });
 
             $('#saveEventButton').click(function (ev) {
+                $(this).button('loading');
                 // Collect form data
                 var title = $('#eventTitle').val();
                 var when = $('#eventWhenDatepicker').datepicker('getDate');
@@ -864,7 +869,16 @@
                     "illnessid": illness.value
                 }
                 // send it to MVVM
-                dashVM.addNewEvent(objData);
+                dashVM.addNewEvent(objData, function () {
+                    alert('Event Saved!');
+                    // clear stuff
+                    $('#eventTitle').val('');
+                    $('#saveEventButton').button('reset');
+                    $('#eventWhenDatepicker').datepicker('setDate', new Date());
+                }, function () {
+                    alert('Oh NO!');
+                    $('#saveEventButton').button('reset');
+                });
             });
         });
     </script>
