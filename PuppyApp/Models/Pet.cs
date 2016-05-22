@@ -11,7 +11,7 @@ namespace PuppyApp.Models {
         // Foreign Key
         public int OwnerId { get; set; }
         // Navigation Prop
-        public virtual UserProfile Owner { get; set; }
+        public virtual Owner Owner { get; set; }
 
     }
 }

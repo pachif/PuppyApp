@@ -33,24 +33,7 @@ namespace PuppyApp.Controllers
             var result = AutoMapperConfig.AppMapper.Map<UserProfile[], UserProfileDTO[]>(db.UserProfiles.ToArray());
             return result.AsQueryable();
         }
-
-        /// <summary>
-        /// Returns an array of Pets objects within this owner
-        /// </summary>
-        /// <param name="id">the user profile id</param>
-        /// <returns>array of pets objects</returns>
-        [ResponseType(typeof(IQueryable<PetDTO>))]
-        [Route("api/UserProfiles/{id}/Pets")]
-        public async Task<IHttpActionResult> GetUserProfilePets(int id) {
-            var profile = await db.UserProfiles.Include(x => x.Mascots).SingleOrDefaultAsync(x => x.Id == id);
-            if (profile == null) {
-                return NotFound();
-            }
-
-            var result = AutoMapperConfig.AppMapper.Map<Pet[], PetDTO[]>(profile.Mascots.ToArray());
-            return Ok(result.AsQueryable());
-        }
-
+        
         // GET: api/UserProfiles/5
         [ResponseType(typeof(UserProfile))]
         public async Task<IHttpActionResult> GetUserProfile(int id)

@@ -523,7 +523,26 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="categPet">Your Pets</label>
+                                    <label class="col-lg-2 control-label" for="categPet">Owner</label>
+                                    <div class="col-lg-9">
+                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="ownerCombobox">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    <span class="glyphicon glyphicon-search"></span>
+                                                    <span class="caret"></span>
+                                                </button>
+                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: filteredOwners">
+                                                    <li data-bind="attr: { 'data-value': OptionId }" data-value="1">
+                                                        <a href="#"><span data-bind="text: OptionText"></span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-lg-2 control-label" for="categPet">Pets</label>
                                     <div class="col-lg-9">
                                         <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="petCombobox">
                                             <input type="text" class="form-control">
@@ -536,11 +555,6 @@
                                                 </ul>
                                             </div>
                                         </div>
-                                        <!--<select class="form-control" id="categPet">
-                                            <option class="item">Pet Name 1</option>
-                                            <option class="item">Pet Name 2</option>
-                                            <option class="item">Pet Name 3</option>
-                                        </select>-->
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -763,6 +777,7 @@
             var markers = getMarkers();
 
             map.addLayer(markers);
+            isExploreShown = true;
         }
 
         function showActivityMap(center) {
@@ -801,7 +816,7 @@
             // fade in the curren one
             $("#" + strPane).removeClass("hide").addClass("in");
             // Show Map
-            if (strPane == 'explopane') {
+            if (strPane == 'explopane' && !isExploreShown) {
                 showExploreMap();
             } else if (strPane == 'eventpane') {
                 getLocation(function(position) {
@@ -836,6 +851,7 @@
         }
 
         var dashVM = null;
+        var isExploreShown = false;
 
         $(document).ready(function () {
             // bind initially VM to HTMLBody
@@ -879,6 +895,11 @@
                     alert('Oh NO!');
                     $('#saveEventButton').button('reset');
                 });
+            });
+
+            $('#ownerCombobox').on('changed.fu.combobox', function (evt, data) {
+                // detect and perform search
+                dashVM.filterOwners(data.text);
             });
         });
     </script>

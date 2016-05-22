@@ -28,5 +28,7 @@ namespace PuppyApp
         public DbSet<Models.HistoryPoint> HistoryPoints { get; set; }
 
         public DbSet<Models.Desease> Deseases { get; set; }
+
+        public System.Data.Entity.DbSet<PuppyApp.Models.Owner> Owners { get; set; }
     }
 }

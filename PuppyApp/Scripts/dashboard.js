@@ -6,16 +6,28 @@ var dashboardViewModel = function () {
 
     this.userProfilesUri = '/api/historypoints/';
     this.recentHistoryEvents = ko.observable(); //represent an array object with all points inside. No VM was necessary
+    this.owners = ko.observableArray();
+    this.filteredOwners = ko.observableArray();
     this.pets = ko.observableArray();
     this.deseases = ko.observableArray();
     this.profile = ko.observable();
 
     // Initial ViewModel Load
-    this.loadRecentEvents = function() {
+    this.loadRecentEvents = function () {
         self.ajaxHelper(self.apiUrl + 'recent', 'GET').done(function (data) {
             // extract usefull data like Title, Latitude, Longitude for now here
             self.recentHistoryEvents(data);
         });
+    };
+
+    this.filterOwners = function (filterText) {
+        if (!filterText) {
+            return self.owners();
+        } else {
+            return ko.utils.arrayFilter(self.owners(), function (item) {
+                return item.OptionText.to;
+            });
+        }
     };
 
     this.addNewEvent = function (eventData, successCallback, failCallback) {
@@ -37,16 +49,6 @@ var dashboardViewModel = function () {
             });
     }
 
-    function loadProfilePets(id) {
-        self.ajaxHelper('/api/userprofiles/' + id + '/pets', 'GET').done(function (data) {
-            if (data.length > 0) {
-                for (var i = 0; i < data.length; i++) {
-                    self.pets.push(data[i]);
-                }
-            }
-        });
-    }
-
     function loadDeseases() {
         self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
             if (data.length > 0) {
@@ -57,9 +59,34 @@ var dashboardViewModel = function () {
         });
     }
 
+    function loadProfilePets(id) {
+        self.ajaxHelper('/api/owners/' + id + '/pets', 'GET').done(function (data) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    self.pets.push(data[i]);
+                }
+            }
+        });
+    }
+
+    function loadOwners() {
+        self.ajaxHelper('/api/owners/options', 'GET').done(function (data) {
+            if (data.length > 0) {
+                self.owners.push({ OptionId: 0, OptionText: 'Add New Owner' });
+                for (var i = 0; i < data.length; i++) {
+                    self.owners.push(data[i]);
+                    if (i < 10) {
+                        // set initial filtered
+                        self.filteredOwners.push(data[i]);
+                    }
+                }
+            }
+        });
+    }
+
     // Initialize Here
     this.apiUrl = '/api/historypoints/';
     loadDeseases();
     loadProfilePets(1);
-    
+    loadOwners();
 };

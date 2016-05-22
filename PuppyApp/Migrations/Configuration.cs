@@ -12,13 +12,19 @@ namespace PuppyApp.Migrations {
 
         protected override void Seed(PuppyServiceContext context) {
             //  This method will be called after migrating to the latest version.
-            UserProfile owner1, owner2;
+            UserProfile profile1, profile2;
             context.UserProfiles.AddOrUpdate(
-                owner1=new UserProfile { Id = 101, Name = "Rodrigo Vigil", Leaves = new Location(-27, -55) },
-                owner2=new UserProfile { Id = 102, Name = "Luis Caranik", Leaves = new Location(-28, -55) },
+                profile1=new UserProfile { Id = 101, Name = "Rodrigo Vigil", Leaves = new Location(-27, -55) },
+                profile2=new UserProfile { Id = 102, Name = "Luis Caranik", Leaves = new Location(-28, -55) },
                 new UserProfile { Id = 103, Name = "Alberto Pinto", Leaves = new Location(-29, -55) }
                 );
 
+            Models.Owner owner1, owner2;
+            context.Owners.AddOrUpdate(
+                owner1 = new Models.Owner { Id = 101, FullName = "Perez, Carlos", IDCard = "25565489" },
+                owner2 = new Models.Owner { Id = 102, FullName = "Gonzales, Juan", IDCard = "11256998" },
+                new Models.Owner { Id = 103, FullName = "Pinto, Alberto", IDCard = "11256998" }
+                );
 
             Pet pet1, pet2, pet3;
             Pet[] pets = new Pet[] {

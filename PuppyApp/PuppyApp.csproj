@@ -173,6 +173,7 @@
     <Compile Include="Controllers\DeseasesController.cs" />
     <Compile Include="Controllers\HistoryPointsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OwnersController.cs" />
     <Compile Include="Controllers\PetsController.cs" />
     <Compile Include="Controllers\UserProfilesController.cs" />
     <Compile Include="DTOS\ComboOptionsDTO.cs" />
@@ -183,19 +184,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201604032132496_Initial.cs" />
-    <Compile Include="Migrations\201604032132496_Initial.Designer.cs">
-      <DependentUpon>201604032132496_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201605062046081_Initial1.cs" />
-    <Compile Include="Migrations\201605062046081_Initial1.Designer.cs">
-      <DependentUpon>201605062046081_Initial1.cs</DependentUpon>
+    <Compile Include="Migrations\201605221337041_migration3.cs" />
+    <Compile Include="Migrations\201605221337041_migration3.Designer.cs">
+      <DependentUpon>201605221337041_migration3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntityObject.cs" />
     <Compile Include="Models\Desease.cs" />
     <Compile Include="Models\HistoryPoint.cs" />
     <Compile Include="Models\Location.cs" />
+    <Compile Include="Models\Owner.cs" />
     <Compile Include="Models\Pet.cs" />
     <Compile Include="Services\PuppyServiceContext.cs" />
     <Compile Include="Models\UserProfile.cs" />
@@ -311,11 +309,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201604032132496_Initial.resx">
-      <DependentUpon>201604032132496_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201605062046081_Initial1.resx">
-      <DependentUpon>201605062046081_Initial1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201605221337041_migration3.resx">
+      <DependentUpon>201605221337041_migration3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

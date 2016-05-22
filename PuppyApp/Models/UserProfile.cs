@@ -12,11 +12,10 @@ namespace PuppyApp.Models {
     public class UserProfile : BaseEntityObject {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string Email { get; set; }
+        public byte[] Password { get; set; }
         public Location Leaves { get; set; }
-        /// <summary>
-        /// Gets or sets the collection of pets which user profile owns. EF Navigation Property.
-        /// </summary>
-        public virtual ICollection<Pet> Mascots { get; set; }
+        
         /// <summary>
         /// Gets or sets the user profile picture
         /// </summary>
