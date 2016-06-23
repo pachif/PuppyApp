@@ -6,8 +6,10 @@ var dashboardViewModel = function () {
 
     this.userProfilesUri = '/api/historypoints/';
     this.recentHistoryEvents = ko.observable(); //represent an array object with all points inside. No VM was necessary
+    this.isPetComboDisabed = ko.observable(false);
     this.owners = ko.observableArray();
     this.filteredOwners = ko.observableArray();
+    this.selectedOwner = ko.observable();
     this.pets = ko.observableArray();
     this.deseases = ko.observableArray();
     this.profile = ko.observable();
@@ -59,8 +61,10 @@ var dashboardViewModel = function () {
         });
     }
 
-    function loadProfilePets(id) {
+    this.loadPets = function(id) {
         self.ajaxHelper('/api/owners/' + id + '/pets', 'GET').done(function (data) {
+            self.isPetComboDisabed(false);
+            self.pets.removeAll();
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     self.pets.push(data[i]);
@@ -72,7 +76,6 @@ var dashboardViewModel = function () {
     function loadOwners() {
         self.ajaxHelper('/api/owners/options', 'GET').done(function (data) {
             if (data.length > 0) {
-                self.owners.push({ OptionId: 0, OptionText: 'Add New Owner' });
                 for (var i = 0; i < data.length; i++) {
                     self.owners.push(data[i]);
                     if (i < 10) {
@@ -87,6 +90,6 @@ var dashboardViewModel = function () {
     // Initialize Here
     this.apiUrl = '/api/historypoints/';
     loadDeseases();
-    loadProfilePets(1);
+    this.isPetComboDisabed(true);
     loadOwners();
 };

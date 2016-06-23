@@ -184,9 +184,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201605221337041_migration3.cs" />
-    <Compile Include="Migrations\201605221337041_migration3.Designer.cs">
-      <DependentUpon>201605221337041_migration3.cs</DependentUpon>
+    <Compile Include="Migrations\201606032122074_Initial.cs" />
+    <Compile Include="Migrations\201606032122074_Initial.Designer.cs">
+      <DependentUpon>201606032122074_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntityObject.cs" />
@@ -274,6 +274,11 @@
     <Content Include="fonts\font-awesome\scss\_spinning.scss" />
     <Content Include="fonts\font-awesome\scss\_stacked.scss" />
     <Content Include="fonts\font-awesome\scss\_variables.scss" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\moment-with-locales.min.js" />
+    <Content Include="Scripts\moment.js" />
+    <Content Include="Scripts\moment.min.js" />
+    <Content Include="wipe system data.sql" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -309,8 +314,8 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201605221337041_migration3.resx">
-      <DependentUpon>201605221337041_migration3.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201606032122074_Initial.resx">
+      <DependentUpon>201606032122074_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

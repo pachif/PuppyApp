@@ -18,7 +18,7 @@
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-    <link href="//www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css" rel="stylesheet">
+    <link href="//www.fuelcdn.com/fuelux/3.15.0/css/fuelux.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -523,17 +523,21 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="categPet">Owner</label>
+                                    <label class="col-lg-2 control-label">Owner</label>
                                     <div class="col-lg-9">
-                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="ownerCombobox">
+                                        <div class="input-group input-append dropdown combobox" id="ownerCombobox">
                                             <input type="text" class="form-control">
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                                    <span class="glyphicon glyphicon-search"></span>
+                                                    <!--<span class="glyphicon glyphicon-search"></span>-->
                                                     <span class="caret"></span>
                                                 </button>
-                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: filteredOwners">
-                                                    <li data-bind="attr: { 'data-value': OptionId }" data-value="1">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ownerModal">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+
+                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: owners">
+                                                    <li data-bind="attr: { 'data-value': OptionId }">
                                                         <a href="#"><span data-bind="text: OptionText"></span></a>
                                                     </li>
                                                 </ul>
@@ -542,14 +546,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="categPet">Pets</label>
+                                    <label class="col-lg-2 control-label">Pets</label>
                                     <div class="col-lg-9">
                                         <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="petCombobox">
                                             <input type="text" class="form-control">
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
                                                 <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: pets">
-                                                    <li data-bind="attr: { 'data-value': PetId }" data-value="1">
+                                                    <li data-bind="attr: { 'data-value': PetId }">
                                                         <a href="#"><span data-bind="text: Name"></span></a>
                                                     </li>
                                                 </ul>
@@ -560,7 +564,7 @@
                                 <div class="form-group">
                                     <label class="col-lg-2 control-label" for="categPet">Desease</label>
                                     <div class="col-lg-9">
-                                        <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="deseaseCombobox">
+                                        <div class="input-group input-append dropdown combobox disabled" data-initialize="combobox" id="deseaseCombobox">
                                             <input type="text" class="form-control">
                                             <div class="input-group-btn">
                                                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
@@ -589,10 +593,12 @@
                                     <hr />
                                     <div class="pull-right">
                                         <button id="discardEventButton" class="btn ">Discard</button>
-                                        <button id="saveEventButton" 
-                                                data-loading-text="Submiting Data ..." 
-                                                style="margin-left:10px" 
-                                                class="btn btn-primary">Save Changes</button>
+                                        <button id="saveEventButton"
+                                                data-loading-text="Submiting Data ..."
+                                                style="margin-left:10px"
+                                                class="btn btn-primary">
+                                            Save Changes
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -644,6 +650,51 @@
                     <h2><i class="fa fa-smile-o"></i></h2>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- New Owner Modal -->
+    <div id="ownerModal" class="modal fade" role="dialog" aria-labelledby="ownerModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content text-center">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="ownerModalLabel">Add New Owner</h4>
+                </div>
+                <div class="modal-body">
+                    <h1 class="text-left">Person Detail</h1>
+                    <hr />
+                    <div id="eventForm" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="firstNameInput">First Name</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="firstNameInput">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="lastNameInput">Last Name</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="lastNameInput">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="uniqueInput">Unique ID</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="uniqueInput" placeholder="ID from issue country">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="petNameInput">Pet Name</label>
+                            <div class="col-xs-9">
+                                <input type="text" class="form-control" id="petNameInput">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Add</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -714,7 +765,8 @@
     <script src="Scripts/jquery-1.10.2.min.js"></script>
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/knockout-3.4.0.debug.js"></script>
-    <script src="//www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+    <script src="Scripts/moment.js"></script>
+    <script src="//www.fuelcdn.com/fuelux/3.15.0/js/fuelux.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -747,6 +799,10 @@
         }
 
         function showEventMap(point) {
+            // detect if it is already shown
+            if ($('#eventMapInput').children().length > 0) {
+                return;
+            }
 
             var map = L.mapbox.map('eventMapInput', 'mapbox.streets', { tileLayer: { format: 'jpg70' } })
                 .setView(point, 15)
@@ -771,7 +827,7 @@
 
         function showExploreMap() {
 
-            var map = L.mapbox.map('exploreMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' }, zindex: 1})
+            var map = L.mapbox.map('exploreMap', 'mapbox.streets', { tileLayer: { format: 'jpg70' }, zindex: 1 })
                             .setView([-27.36616489612778, -55.89320182800293], 13);
 
             var markers = getMarkers();
@@ -819,8 +875,8 @@
             if (strPane == 'explopane' && !isExploreShown) {
                 showExploreMap();
             } else if (strPane == 'eventpane') {
-                getLocation(function(position) {
-                    var point = [position.coords.latitude,position.coords.longitude];
+                getLocation(function (position) {
+                    var point = [position.coords.latitude, position.coords.longitude];
                     showEventMap(point);
                 });
             }
@@ -862,8 +918,11 @@
 
             showActivityMap();
             // another initialization
-            var now = new Date();
-            $('#eventWhenDatepicker').datepicker({ retricted: [{ from : new Date(now.getFullYear() -5,1,1), to: new Date(now.getFullYear() + 5,12,31) }] });
+            var d1 = moment().subtract(10,'years').format('MM/DD/YYYY');
+            //var d2 =  new Date(now.getFullYear() + 5, 12, 31);
+            $('#eventWhenDatepicker').datepicker({
+                retricted: [{ from: '01/01/1996', to: '12/31/2026' }]
+            });
 
             $('#saveEventButton').click(function (ev) {
                 $(this).button('loading');
@@ -897,10 +956,42 @@
                 });
             });
 
-            $('#ownerCombobox').on('changed.fu.combobox', function (evt, data) {
-                // detect and perform search
-                dashVM.filterOwners(data.text);
+            $('#ownerCombobox').combobox({
+                filterOnKeypress: true,
+                showOptionsOnKeypress: true,
+                filter: function filter(list, predicate, self) {
+                    var visible = 0;
+                    self.$dropMenu.find('.empty-indicator').remove();
+
+                    list.each(function (i) {
+                        var $li = $(this);
+                        var text = $(this).text().trim().toLowerCase();
+
+                        $li.removeClass();
+
+                        if (text === predicate.toLowerCase()) {
+                            $li.addClass('text-success');
+                            visible++;
+                        } else if (text.substr(text.indexOf(predicate), predicate.length) === predicate) {
+                            $li.addClass('text-info');
+                            visible++;
+                        } else {
+                            $li.addClass('hidden');
+                        }
+                    });
+
+                    if (visible === 0) {
+                        self.$dropMenu.append('<li class="empty-indicator text-muted"><em>No Matches</em></li>');
+                    }
+                }
+            }).on('changed.fu.combobox', function (evt, data) {
+                var selectedItem = $('#ownerCombobox').combobox('selectedItem');
+                dashVM.loadPets(selectedItem.value);
+                $('#petCombobox').combobox('enable');
             });
+
+            $('#ownerCombobox').combobox('enable');
+            $('#petCombobox').combobox('disable');
         });
     </script>
 </body>
