@@ -76,3 +76,19 @@ function getLocation(positionAction) {
     }
 }
 
+function showAlertMessage(selector, fail, message) {
+    var typeMsg = fail ? "danger" : "success";
+    var rawHtml = "<div class=\"alert alert-" + typeMsg + " alert-dismissable\">" +
+        "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>" +
+        "<i class=\"fa fa-info-circle\"></i>  <strong>" + message + "</strong>" +
+        "</div>";
+    var alertDiv = $(rawHtml);
+    var jqueryElement = $(selector);
+    jqueryElement.append(alertDiv);
+    $('html, body').animate({ scrollTop: 10 }, 'slow');
+    alertDiv.fadeOut(3000, function (ev) {
+        // On Complete Remove it
+        alertDiv.remove();
+    });
+}
+
