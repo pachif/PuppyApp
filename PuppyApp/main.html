@@ -51,7 +51,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
                     <ul class="dropdown-menu message-dropdown">
                         <li class="message-preview">
                             <a href="#">
@@ -107,39 +107,12 @@
                     </ul>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
-                    <ul class="dropdown-menu alert-dropdown">
-                        <li>
-                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
-                        </li>
-                        <li>
-                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="#" data-toggle="modal" data-target="#soonModal">View All</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                         <img class="img-circle" src="http://placehold.it/24x24" alt=""> John Smith <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="#" data-toggle="modal" data-target="#soonModal"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                            <a href="#" data-toggle="modal" data-target="#soonModal"><i class="fa fa-fw fa-pencil"></i> Edit Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
@@ -526,13 +499,11 @@
                                         <div class="input-group input-append dropdown combobox" id="ownerCombobox">
                                             <input type="text" class="form-control">
                                             <div class="input-group-btn">
-                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" data-initialize="combobox">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                                     <!--<span class="glyphicon glyphicon-search"></span>-->
                                                     <span class="caret"></span>
                                                 </button>
-                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ownerModal">
-                                                    <span class="glyphicon glyphicon-plus"></span>
-                                                </button>
+                                                
 
                                                 <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: owners">
                                                     <li data-bind="attr: { 'data-value': OptionId }">
@@ -540,7 +511,13 @@
                                                     </li>
                                                 </ul>
                                             </div>
+                                            
                                         </div>
+                                        <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default" data-toggle="modal" data-target="#ownerModal">
+                                                    <span class="glyphicon glyphicon-plus"></span>
+                                                </button>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -665,18 +642,19 @@
                 <div class="modal-body">
                     <h1 class="text-left">Person Detail</h1>
                     <hr />
-                    <form id="ownerForm" role="form" class="form-horizontal" data-toggle="validator">
+                    <form id="ownerForm" class="form-horizontal" role="form" data-toggle="validator">
                         <div class="form-group">
                             <label class="col-xs-3 control-label" for="firstNameInput">First Name</label>
                             <div class="col-xs-9">
                                 <input type="text" class="form-control" id="firstNameInput" data-minlength="3" placeholder="Juan" required>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        <div class="form-group ">
+                        <div class="form-group">
                             <label class="col-xs-3 control-label" for="lastNameInput">Last Name</label>
                             <div class="col-xs-9">
                                 <input type="text" class="form-control" id="lastNameInput" data-minlength="3" placeholder="Perez" required>
-                                
+                                <div class="help-block with-errors"></div>
                             </div>
                             
                         </div>
@@ -684,19 +662,29 @@
                             <label class="col-xs-3 control-label" for="uniqueInput">Unique ID</label>
                             <div class="col-xs-9">
                                 <input type="number" class="form-control" id="uniqueInput" placeholder="ID from issue country" required>
-                                <span class="glyphicon form-control-feedback" aria-hidden="true"></span>
+                                <div class="help-block with-errors"></div>
                             </div>
                         </div>
-                        <div class="form-group has-feedback">
+                        <div class="form-group">
                             <label class="col-xs-3 control-label" for="petNameInput">Pet Name</label>
                             <div class="col-xs-9">
                                 <input type="text" class="form-control" id="petNameInput">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-xs-3 control-label" for="ownerPetCategoryCombobox">Category</label>
+                            <div class="col-xs-9">
+                                <select class="form-control" id="ownerPetCategoryCombobox">
+                                    <option class="item">Dogs</option>
+                                    <option class="item">Cats</option>
+                                    <option class="item">Other</option>
+                                </select>
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-primary" >Add</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -936,8 +924,8 @@
                 var when = $('#eventWhenDatepicker').datepicker('getDate');
                 var latitude = $('#eventLat').val();
                 var longitude = $('#eventLng').val();
-                var pet = $('#petCombobox').combobox('selectedItem');
-                var illness = $('#deseaseCombobox').combobox('selectedItem');
+                var petOption = $('#petCombobox').combobox('selectedItem');
+                var illnessOption = $('#deseaseCombobox').combobox('selectedItem');
 
                 // Create Object
                 var objData = {
@@ -945,10 +933,10 @@
                     "when": when,
                     "latitude": latitude,
                     "longitude": longitude,
-                    "petid": pet.value,
-                    "illnessid": illness.value
+                    "petid": petOption.value,
+                    "illnessid": illnessOption.value
                 }
-                // send it to MVVM
+                // send it to MVVM, to made the ajax call
                 dashVM.addNewEvent(objData, function () {
                     //$('#successfullEventSaveAlertDiv').removeClass('hide').addClass('fade in');
                     showAlertMessage("#eventAlertDiv", false, "Changes saved successfully");
@@ -969,6 +957,49 @@
                     $('#failEventSaveAlertDiv').removeClass('hide').addClass('fade in');
                     $('#saveEventButton').button('reset');
                 });
+            });
+
+            $('#ownerForm').validator().on('submit', function (e) {
+                if (e.isDefaultPrevented()) {
+                    // handle the invalid form...
+                    alert('This is a not valid form please correct');
+
+                } else {
+                    // everything looks good!
+                    // give feedback
+                    $(this).button('Saving Changes');
+                    // Collect Form Data and build the entity
+                    var firstName = $('#firstNameInput').val();
+                    var lastName = $('#lastNameInput').val();
+                    var issueId = $('#uniqueInput').val();
+                    var petName = $('#petName').val();
+                    var specieOption = $('#specieOwnerCombobox').combobox('selectedItem')
+                    var objData = {
+                        FullName: firstName + ' ' + lastName,
+                        IDCard: issueId,
+                        Pets: [{
+                            Name: petName,
+                            Specie: specieOption.text,
+                        }]
+                    };
+                    // make ajax call using VMMV
+                    dashVM.addNewOwner(objData,
+                        function () {
+                            // if it is successfull
+                            // Clear from data 
+                            $('#firstNameInput').val('');
+                            $('#lastNameInput').val('');
+                            $('#uniqueInput')
+                            $('#petName').val();
+                            $('#specieOwnerCombobox').find('input:text').val('');
+                            // dismiss modal
+                        },
+                        function () {
+                            // if its fail
+                            showAlertMessage("#ownerAlertDiv", true, "Oh no! something wrong with the data or service is not available. Try again later.");
+
+                        });
+                }
             });
 
             $('#ownerCombobox').combobox({

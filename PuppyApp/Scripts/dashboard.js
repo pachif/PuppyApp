@@ -51,6 +51,20 @@ var dashboardViewModel = function () {
             });
     }
 
+    this.addNewOwner = function (ownerData, successCallback, failCallback) {
+        self.ajaxHelper("/api/owners", 'POST', ownerData)
+            .done(function (data) {
+                if (successCallback != null) {
+                    successCallback();
+                }
+            })
+            .fail(function (data) {
+                if (failCallback != null) {
+                    failCallback();
+                }
+            });
+    }
+
     function loadDeseases() {
         self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
             if (data.length > 0) {
