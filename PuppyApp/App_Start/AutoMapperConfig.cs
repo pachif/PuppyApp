@@ -24,6 +24,7 @@ namespace PuppyApp {
                 cfg.CreateMap<Pet, PetDTO>()
                 .ForMember(d => d.PetId, opts => opts.MapFrom(src => src.Id))
                 .ForMember(d => d.Name, opts => opts.MapFrom(src => src.Name))
+                .ForMember(d => d.BirthDate, opts => opts.MapFrom(src => src.BirthDate))
                 .ForMember(d => d.Specie, opts => opts.MapFrom(src => src.Specie))
                 .ForMember(d => d.Photo, opts => opts.MapFrom(src => src.Photo));
 

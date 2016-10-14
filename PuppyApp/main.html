@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en" class="fuelux">
 <head>
     <title>Main</title>
     <meta charset="utf-8">
@@ -295,16 +295,12 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <h1 class="page-header">
-                                Your Pack <small>Details</small>
+                                Pets <small>Details</small>
                             </h1>
-                            <ol class="breadcrumb">
-                                <li class="active">
-                                    <i class="fa fa-paw"></i> Manage Pets
-                                </li>
-                            </ol>
+                            
                         </div>
                     </div>
-                    <!-- Pane Section 1 -->
+                    <!-- Pane Section Alerts -->
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="alert alert-info alert-dismissable hide">
@@ -317,98 +313,182 @@
                     <!-- Pane Section 2 -->
                     <div class="row">
                         <div class="col-lg-offset-1 col-lg-10">
-                            <form class="form-horizontal">
+                            <div class="form-horizontal">
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="petName">Pet Name</label>
+                                    <label class="col-lg-2 control-label" for="ptOwnerCombobox">Select Owner</label>
                                     <div class="col-lg-9">
-                                        <input type="text" class="form-control" id="petName" placeholder="Name goes here">
+                                        <div class="input-group input-append dropdown combobox" id="ptOwnerCombobox" data-initialize="combobox">
+                                            <input type="text" class="form-control">
+                                            <div class="input-group-btn">
+                                                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                    <span class="caret"></span>
+                                                </button>
+                                                
+
+                                                <ul class="dropdown-menu dropdown-menu-right" data-bind="foreach: owners">
+                                                    <li data-bind="attr: { 'data-value': OptionId }">
+                                                        <a href="#"><span data-bind="text: OptionText"></span></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="birthDatePet">Birthdate</label>
-                                    <div class="col-lg-9">
-                                        <input type="date" class="form-control" id="birthDatePet">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="categPet">Pet Category</label>
-                                    <div class="col-lg-9">
-                                        <select class="form-control" id="categPet">
-                                            <option class="item">Dogs</option>
-                                            <option class="item">Cats</option>
-                                            <option class="item">Other</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-lg-offset-2 col-lg-8">
-                                        <button onclick="javascript: addPet(this);" class="btn">Add</button>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="form-group-select">Your Pets</label>
-                                    <div class="col-lg-9">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">Pet Name 1</h4>
-                                                        Category: <span>Dog</span><br />
-                                                        BirthDate: <span>Thursday 14, April, 2015</span>
-                                                    </div>
-                                                    <div class="media-right">
-                                                        <div>
-                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
-                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                <div data-bind="if: selectedOwner">
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Registered Pets</label>
+                                        <div class="col-lg-9">
+                                            <ul class="list-group" data-bind="foreach: pets">
+                                                <li class="list-group-item">
+                                                    <div class="media">
+                                                        <div class="media-body">
+                                                            <h4 class="media-heading" data-bind="text: Name"></h4>
+                                                            Category: <span data-bind="text: Specie">Dog</span><br />
+                                                            Birth Date: <span data-bind="text: BirthDate">Thursday 14, April, 2015</span>
                                                         </div>
-                                                        <img class="img-circle media-object" />
+                                                        <div class="media-right">
+                                                            <div>
+                                                                <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
+                                                                <button class="btn btn-danger"><i class="fa fa-trash"></i></button>
+                                                            </div>
+                                                            <img class="img-circle media-object" />
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <ol class="breadcrumb">
+                                        <li class="active">
+                                            <i class="fa fa-paw"></i> Add More Mascots
+                                        </li>
+                                    </ol>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label" for="petName">Pet Name</label>
+                                        <div class="col-lg-9">
+                                            <input type="text" class="form-control" id="petName" placeholder="Laika">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label">Birth Date</label>
+                                        <div class="col-lg-9">
+                                            <div class="datepicker fuelux" id="ptBirthDatepicker">
+                                                <div class="input-group">
+                                                    <input class="form-control" type="text"  />
+                                                    <div class="input-group-btn">
+                                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                            <span class="fa fw fa-calendar"></span>
+                                                            <span class="sr-only">Toggle Calendar</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right datepicker-calendar-wrapper" role="menu">
+                                                            <div class="datepicker-calendar">
+                                                                <div class="datepicker-calendar-header">
+                                                                    <button type="button" class="prev"><span class="glyphicon glyphicon-chevron-left"></span><span class="sr-only">Previous Month</span></button>
+                                                                    <button type="button" class="next"><span class="glyphicon glyphicon-chevron-right"></span><span class="sr-only">Next Month</span></button>
+                                                                    <button type="button" class="title" data-month="11" data-year="2014">
+                                                                        <span class="month">
+                                                                            <span data-month="0">January</span>
+                                                                            <span data-month="1">February</span>
+                                                                            <span data-month="2">March</span>
+                                                                            <span data-month="3">April</span>
+                                                                            <span data-month="4">May</span>
+                                                                            <span data-month="5">June</span>
+                                                                            <span data-month="6">July</span>
+                                                                            <span data-month="7">August</span>
+                                                                            <span data-month="8">September</span>
+                                                                            <span data-month="9">October</span>
+                                                                            <span data-month="10">November</span>
+                                                                            <span data-month="11" class="current">December</span>
+                                                                        </span> <span class="year">2014</span>
+                                                                    </button>
+                                                                </div>
+                                                                <table class="datepicker-calendar-days">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Su</th>
+                                                                            <th>Mo</th>
+                                                                            <th>Tu</th>
+                                                                            <th>We</th>
+                                                                            <th>Th</th>
+                                                                            <th>Fr</th>
+                                                                            <th>Sa</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody></tbody>
+                                                                </table>
+                                                                <div class="datepicker-calendar-footer">
+                                                                    <button type="button" class="datepicker-today">Today</button>
+                                                                </div>
+                                                            </div>
+                                                            <div class="datepicker-wheels" aria-hidden="true">
+                                                                <div class="datepicker-wheels-month">
+                                                                    <h2 class="header">Month</h2>
+                                                                    <ul>
+                                                                        <li data-month="0"><button type="button">Jan</button></li>
+                                                                        <li data-month="1"><button type="button">Feb</button></li>
+                                                                        <li data-month="2"><button type="button">Mar</button></li>
+                                                                        <li data-month="3"><button type="button">Apr</button></li>
+                                                                        <li data-month="4"><button type="button">May</button></li>
+                                                                        <li data-month="5"><button type="button">Jun</button></li>
+                                                                        <li data-month="6"><button type="button">Jul</button></li>
+                                                                        <li data-month="7"><button type="button">Aug</button></li>
+                                                                        <li data-month="8"><button type="button">Sep</button></li>
+                                                                        <li data-month="9"><button type="button">Oct</button></li>
+                                                                        <li data-month="10"><button type="button">Nov</button></li>
+                                                                        <li data-month="11"><button type="button">Dec</button></li>
+                                                                    </ul>
+                                                                </div>
+                                                                <div class="datepicker-wheels-year">
+                                                                    <h2 class="header">Year</h2>
+                                                                    <ul></ul>
+                                                                </div>
+                                                                <div class="datepicker-wheels-footer clearfix">
+                                                                    <button type="button" class="btn datepicker-wheels-back"><span class="glyphicon glyphicon-arrow-left"></span><span class="sr-only">Return to Calendar</span></button>
+                                                                    <button type="button" class="btn datepicker-wheels-select">Select <span class="sr-only">Month and Year</span></button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">Pet Name 2</h4>
-                                                        Category: <span>Dog</span><br />
-                                                        BirthDate: <span>Thursday 14, April, 2015</span>
-                                                    </div>
-                                                    <div class="media-right ">
-                                                        <div>
-                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
-                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                        </div>
-                                                        <img class="img-circle media-object" />
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li class="list-group-item">
-                                                <div class="media">
-                                                    <div class="media-body">
-                                                        <h4 class="media-heading">Pet Name 3</h4>
-                                                        Category: <span>Cat</span><br />
-                                                        BirthDate: <span>Thursday 14, May, 2015</span>
-                                                    </div>
-                                                    <div class="media-right ">
-                                                        <div>
-                                                            <button data-toggle="modal" data-target="#historyModal" style="margin-bottom:2px" class="btn btn-info"><i class="fa fa-clock-o"></i></button>
-                                                            <button onclick="javascript:removePet(this)" class="btn btn-danger"><i class="fa fa-trash"></i></button>
-                                                        </div>
-                                                        <img class="img-circle media-object" />
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <div class="form-group">
+                                        <label class="col-lg-2 control-label" for="ptSpecieCombobox">Pet Category</label>
+                                        <div class="col-lg-9">
+                                            <div class="input-group input-append dropdown combobox" id="ptSpecieCombobox" data-initialize="combobox">
+                                                <input type="text" class="form-control">
+                                                <div class="input-group-btn">
+                                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                                        <span class="caret"></span>
+                                                    </button>
+                                                    <ul class="dropdown-menu dropdown-menu-right">
+                                                        <li data-value="1"><a href="#">Dogs</a></li>
+                                                        <li data-value="2"><a href="#">Cats</a></li>
+                                                        <li data-value="3"><a href="#">Others</a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-lg-offset-2 col-lg-8">
+                                            <button onclick="javascript: addPet(this);" class="btn">Add</button>
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <!-- Buttons -->
                                 <div class="col-lg-offset-1 col-lg-10">
                                     <hr />
                                     <div class="pull-right">
                                         <button class="btn ">Discard</button>
-                                        <button style="margin-left:10px" class="btn btn-primary">Save Changes</button>
+                                        <button id="saveOwnerDetailsButton" style="margin-left: 10px"
+                                                 data-loading-text="Submiting Data ..."
+                                                class="btn btn-primary">Save Changes</button>
                                     </div>
                                 </div>
-                            </form>
+                            </div>
                         </div>
 
                     </div>
@@ -439,7 +519,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="eventWhen">When</label>
+                                    <label class="col-lg-2 control-label" for="eventWhenInput">When</label>
                                     <div class="col-lg-9">
                                         <div class="datepicker fuelux" id="eventWhenDatepicker">
                                             <div class="input-group">
@@ -562,7 +642,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-lg-2 control-label" for="categPet">Desease</label>
+                                    <label class="col-lg-2 control-label" for="deseaseCombobox">Desease</label>
                                     <div class="col-lg-9">
                                         <div class="input-group input-append dropdown combobox disabled" data-initialize="combobox" id="deseaseCombobox">
                                             <input type="text" class="form-control">
@@ -771,7 +851,6 @@
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     <!-- Custom JavaScript -->
-    <script src="Scripts/scrollTo.js"></script>
     <script src="Scripts/app.js"></script>
     <script src="Scripts/dashboard.js"></script>
     <script>
@@ -869,8 +948,8 @@
             // fade out all the panels
             var paneEl = $("#" + strPane);
             paneEl.parent().children(".fade.in").removeClass("in").addClass("hide");
-            // fade in the curren one
-            $("#" + strPane).removeClass("hide").addClass("in");
+            // fade in the current one
+            paneEl.removeClass("hide").addClass("in");
             // Show Map
             if (strPane == 'explopane' && !isExploreShown) {
                 showExploreMap();
@@ -888,10 +967,28 @@
         }
 
         function addPet(source) {
-            var petName = $("petName").text();
-            var birthDate = $("birthDatePet").text();
-            var categ = $("categPet").find("option:selected").text();
 
+            // Set Relevant Data
+            var petName = $("#petName").val();
+            var birthDate = $("#ptBirthDatepicker").datepicker('getDate');
+            var categ = $("#ptSpecieCombobox").combobox('selectedItem');
+
+            var petData = {
+                PetId: 0,
+                Photo: null,
+                Name: petName,
+                BirthDate: birthDate,
+                Specie : categ.text
+            }
+
+            dashVM.AddNewPet(petData);
+
+            // Clear Form
+            $("#petName").val('');
+            $("#ptBirthDatepicker").datepicker('setDate', new Date());
+            $("#categPet").find("option:selected").text();
+
+            //TODO: Review here clearing the form is not working
             event.preventDefault();
         }
 
@@ -906,22 +1003,12 @@
             event.preventDefault();
         }
 
-        var dashVM = null;
-        var isExploreShown = false;
-
-        $(document).ready(function () {
-            // bind initially VM to HTMLBody
-            dashVM = new dashboardViewModel()
-            ko.applyBindings(dashVM);
-            // set my access token in order to show maps
-            L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
-
-            showActivityMap();
+        function prepareEventPanel() {
             // another initialization
-            var d1 = moment().subtract(10,'years').format('MM/DD/YYYY');
+            var d1 = moment().subtract(10, 'years').format('MM/DD/YYYY');
             //var d2 =  new Date(now.getFullYear() + 5, 12, 31);
             $('#eventWhenDatepicker').datepicker({
-                retricted: [{ from: '01/01/1996', to: '12/31/2026' }]
+                retricted: [{ from: -Infinity, to: '01/01/1996' }]
             });
 
             $('#saveEventButton').click(function (ev) {
@@ -988,9 +1075,55 @@
                 var selectedItem = $('#ownerCombobox').combobox('selectedItem');
                 dashVM.loadPets(selectedItem.value);
                 $('#petCombobox').combobox('enable');
+                
             });
 
-            $('#ownerCombobox').combobox('enable');
+            
+        }
+
+        function preparePetPanel() {
+            ///<summary>Prepares the manage pets</summary>
+
+            //TODO: Set combobox with filtering
+            
+            // owner
+            $('#ptOwnerCombobox').combobox().on('changed.fu.combobox', function (evt, data) {
+                var selectedItem = $('#ptOwnerCombobox').combobox('selectedItem');
+                dashVM.selectedOwner(selectedItem.value);
+                dashVM.loadPets(selectedItem.value);
+                // TODO: Initialize Date Picker Is not working - Valid Date Range
+                var minDate = new Date();
+                minDate.setFullYear(minDate.getFullYear() - 15);
+                var maxDate = new Date();
+                maxDate.setFullYear(maxDate.getFullYear() + 15);
+                $('#ptBirthDatepicker').datepicker({
+                    retricted: [
+                        { from: -Infinity, to: minDate.toDateString() },
+                        { from: maxDate.toDateString(), to: Infinity }
+                    ]
+                });
+            });
+
+
+        }
+
+        var dashVM = null;
+        var isExploreShown = false;
+
+        $(document).ready(function () {
+            // bind initially VM to HTMLBody
+            dashVM = new dashboardViewModel();
+            ko.applyBindings(dashVM);
+            // set my access token in order to show maps
+            L.mapbox.accessToken = 'pk.eyJ1IjoicGFjaGlmbHllciIsImEiOiJjaW4zdmwydWswYnphdjdrazRwcWY5enU1In0.U5Z6syz8o-TcXv2uR6Qqug';
+
+            showActivityMap();
+            
+            prepareEventPanel();
+
+            preparePetPanel();
+
+            //$('#ownerCombobox').combobox('enable');
             $('#petCombobox').combobox('disable');
         });
     </script>

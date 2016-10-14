@@ -26,9 +26,9 @@ namespace PuppyApp.Migrations {
 
             Pet pet1, pet2, pet3;
             Pet[] pets = new Pet[] {
-                pet1=new Pet { Id = 201, Name = "Mascot 1", Specie = "Dog", Modified = DateTime.Now, Owner = owner1 },
-                pet2=new Pet { Id = 202, Name = "Mascot 2", Specie = "Cat", Modified = DateTime.Now, Owner = owner2 },
-                pet3=new Pet { Id = 203, Name = "Mascot 3", Specie = "Spider", Modified = DateTime.Now, OwnerId = 503 }};
+                pet1=new Pet { Id = 201, Name = "Mascot 1", Specie = "Dog", BirthDate = DateTime.Now.AddDays(-4), Modified = DateTime.Now, Owner = owner1 },
+                pet2=new Pet { Id = 202, Name = "Mascot 2", Specie = "Cat", BirthDate = DateTime.Now.AddDays(-9), Modified = DateTime.Now, Owner = owner2 },
+                pet3=new Pet { Id = 203, Name = "Mascot 3", Specie = "Spider", BirthDate = DateTime.Now.AddDays(-3), Modified = DateTime.Now, OwnerId = 503 }};
             context.Pets.AddOrUpdate(pets);
 
             Desease des1, des2;

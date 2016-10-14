@@ -32,6 +32,16 @@ var dashboardViewModel = function () {
         }
     };
 
+    this.AddNewPet = function(petData) {
+        ///<summary>Performs a simple array operation over pets</summary>
+        self.pets.push(petData);
+    };
+
+    this.updateOwnerPets = function(eventData, successCallback, failCallback) {
+        ///<summary>Updates the Owner pets</summary>
+        //TODO: Complete Here With Call to API to store the new pets to owner
+    };
+
     this.addNewEvent = function (eventData, successCallback, failCallback) {
         ///<summary>Adds new HistoryPoint to database</summary>
         ///<param name='eventData'>the DTO object</param>
@@ -51,17 +61,7 @@ var dashboardViewModel = function () {
             });
     }
 
-    function loadDeseases() {
-        self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
-            if (data.length > 0) {
-                for (var i = 0; i < data.length; i++) {
-                    self.deseases.push(data[i]);
-                }
-            }
-        });
-    }
-
-    this.loadPets = function(id) {
+    this.loadPets = function (id) {
         self.ajaxHelper('/api/owners/' + id + '/pets', 'GET').done(function (data) {
             self.isPetComboDisabed(false);
             self.pets.removeAll();
@@ -73,6 +73,16 @@ var dashboardViewModel = function () {
         });
     }
 
+    function loadDeseases() {
+        self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    self.deseases.push(data[i]);
+                }
+            }
+        });
+    }
+    
     function loadOwners() {
         self.ajaxHelper('/api/owners/options', 'GET').done(function (data) {
             if (data.length > 0) {

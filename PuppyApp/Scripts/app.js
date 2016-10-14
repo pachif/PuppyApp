@@ -57,7 +57,7 @@ var profileViewModel = function () {
             Photo: self.newProfile.Photo()
         };
 
-        self.ajaxHelper(self.apiUrl, 'POST', book).done(function (item) {
+        self.ajaxHelper(self.apiUrl, 'POST', profile).done(function (item) {
             self.profiles.push(item);
         });
     };
@@ -66,13 +66,14 @@ var profileViewModel = function () {
     self.newItem(this.newProfile);
 };
 
-function getLocation(positionAction) {
+function getLocation(afterGetPositionCallback, domElement) {
     ///<summary>Calls the browser geolocalizations feature</summary>
-    ///<param name="positionAction"></param>
+    ///<param name="afterGetPositionCallback">the function to be called after get the current location</param>
+    ///<param name="domElement">JS DOM element to be refreshed with the error message</param>
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(positionAction);
+        navigator.geolocation.getCurrentPosition(afterGetPositionCallback);
     } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
+        domElement.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 

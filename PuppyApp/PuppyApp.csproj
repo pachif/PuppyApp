@@ -188,6 +188,10 @@
     <Compile Include="Migrations\201606032122074_Initial.Designer.cs">
       <DependentUpon>201606032122074_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607100142482_PetBirthDate.cs" />
+    <Compile Include="Migrations\201607100142482_PetBirthDate.Designer.cs">
+      <DependentUpon>201607100142482_PetBirthDate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseEntityObject.cs" />
     <Compile Include="Models\Desease.cs" />
@@ -316,6 +320,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201606032122074_Initial.resx">
       <DependentUpon>201606032122074_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607100142482_PetBirthDate.resx">
+      <DependentUpon>201607100142482_PetBirthDate.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

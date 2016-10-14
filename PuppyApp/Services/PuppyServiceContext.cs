@@ -19,6 +19,8 @@ namespace PuppyApp
         {
             // Debug Help
             this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
+            // Customize Initialization
+            Database.SetInitializer<PuppyServiceContext>(new DropCreateDatabaseIfModelChanges<PuppyServiceContext>());
         }
 
         public DbSet<Models.UserProfile> UserProfiles { get; set; }
