@@ -634,15 +634,16 @@
     <!-- New Owner Modal -->
     <div id="ownerModal" class="modal fade" role="dialog" aria-labelledby="ownerModalLabel">
         <div class="modal-dialog" role="document">
-            <div class="modal-content text-center">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="ownerModalLabel">Add New Owner</h4>
-                </div>
-                <div class="modal-body">
-                    <h1 class="text-left">Person Detail</h1>
-                    <hr />
-                    <form id="ownerForm" class="form-horizontal" role="form" data-toggle="validator">
+            <form id="ownerForm" class="form-horizontal" role="form" data-toggle="validator">
+                <div class="modal-content text-center">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="ownerModalLabel">Add New Owner</h4>
+                    </div>
+                    <div class="modal-body">
+                        <h1 class="text-left">Person Detail</h1>
+                        <hr />
+
                         <div class="form-group">
                             <label class="col-xs-3 control-label" for="firstNameInput">First Name</label>
                             <div class="col-xs-9">
@@ -656,7 +657,7 @@
                                 <input type="text" class="form-control" id="lastNameInput" data-minlength="3" placeholder="Perez" required>
                                 <div class="help-block with-errors"></div>
                             </div>
-                            
+
                         </div>
                         <div class="form-group">
                             <label class="col-xs-3 control-label" for="uniqueInput">Unique ID</label>
@@ -681,13 +682,14 @@
                                 </select>
                             </div>
                         </div>
-                    </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary" >Add</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
     <!-- History Modal -->
@@ -760,7 +762,7 @@
     <script src='//api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <script src='//api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/fuelux/3.15.0/js/fuelux.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.10.2/validator.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/1000hz-bootstrap-validator/0.11.5/validator.js"></script>
     <!-- Custom JavaScript (below) -->
     <script src="Scripts/scrollTo.js"></script>
     <script src="Scripts/app.js"></script>
@@ -970,6 +972,7 @@
                 });
             });
 
+            // Validation of Owner Modal Dialog
             $('#ownerForm').validator().on('submit', function (e) {
                 if (e.isDefaultPrevented()) {
                     // handle the invalid form...
@@ -988,7 +991,7 @@
                     var objData = {
                         FullName: firstName + ' ' + lastName,
                         IDCard: issueId,
-                        Pets: [{
+                        Mascots: [{
                             Name: petName,
                             Specie: specieOption.text,
                         }]

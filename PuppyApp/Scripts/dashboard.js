@@ -4,7 +4,6 @@ var dashboardViewModel = function () {
     self = this;
     ko.BaseViewModel.call(self);
 
-    this.userProfilesUri = '/api/historypoints/';
     this.recentHistoryEvents = ko.observable(); //represent an array object with all points inside. No VM was necessary
     this.isPetComboDisabed = ko.observable(false);
     this.owners = ko.observableArray();
@@ -65,16 +64,6 @@ var dashboardViewModel = function () {
             });
     }
 
-    function loadDeseases() {
-        self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
-            if (data.length > 0) {
-                for (var i = 0; i < data.length; i++) {
-                    self.deseases.push(data[i]);
-                }
-            }
-        });
-    }
-
     this.loadPets = function(id) {
         self.ajaxHelper('/api/owners/' + id + '/pets', 'GET').done(function (data) {
             self.isPetComboDisabed(false);
@@ -82,6 +71,16 @@ var dashboardViewModel = function () {
             if (data.length > 0) {
                 for (var i = 0; i < data.length; i++) {
                     self.pets.push(data[i]);
+                }
+            }
+        });
+    }
+
+    function loadDeseases() {
+        self.ajaxHelper('/api/deseases/', 'GET').done(function (data) {
+            if (data.length > 0) {
+                for (var i = 0; i < data.length; i++) {
+                    self.deseases.push(data[i]);
                 }
             }
         });

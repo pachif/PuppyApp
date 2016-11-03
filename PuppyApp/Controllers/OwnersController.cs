@@ -31,6 +31,7 @@ namespace PuppyApp.Controllers
         }
 
         // GET: api/Owners/Options
+        [ResponseType(typeof(IQueryable<ComboOptionsDTO>))]
         [Route("api/Owners/Options")]
         public IQueryable<ComboOptionsDTO> GetOwnersOptions() {
             var result = AutoMapperConfig.AppMapper.Map<Owner[], ComboOptionsDTO[]>(db.Owners.ToArray());
@@ -112,6 +113,8 @@ namespace PuppyApp.Controllers
             }
 
             db.Owners.Add(owner);
+            owner.UpdateOwnership();
+            db.Pets.AddRange(owner.Mascots);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = owner.Id }, owner);
