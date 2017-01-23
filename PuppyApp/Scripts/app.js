@@ -1,5 +1,4 @@
-﻿/// <reference path="jquery-1.10.2.min.js" />
-/// <reference path="knockout-3.4.0.js" />
+﻿/// <reference path="_references.js" />
 
 (function (ko, ok) {
     ko.BaseViewModel = function () {

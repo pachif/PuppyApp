@@ -12,7 +12,7 @@ var dashboardViewModel = function () {
     this.pets = ko.observableArray();
     this.deseases = ko.observableArray();
     this.profile = ko.observable();
-
+    this.newOwner = ko.observable();
     // Initial ViewModel Load
     this.loadRecentEvents = function () {
         self.ajaxHelper(self.apiUrl + 'recent', 'GET').done(function (data) {
@@ -48,6 +48,15 @@ var dashboardViewModel = function () {
                     failCallback();
                 }
             });
+    }
+
+    // TODO: This need to be refactored.
+    // Attach KO to bootstrap modal open event using bindings
+    // Use the ownerVM 
+    // Attach the proper events boostrap-validator handling to ownerVM
+    this.addNewOwner2 = function () {
+        var ownerVM = new ownerViewModel();
+        self.newOwner(ownerVM);
     }
 
     this.addNewOwner = function (ownerData, successCallback, failCallback) {

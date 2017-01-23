@@ -8,6 +8,7 @@ var ownerViewModel = function () {
     self.lastName = ko.observable();
     self.UniqueId = ko.observable();
     self.mascotName = ko.observable();
+    
     self.fullName = ko.pureComputed(function () {
         return self.firstName() + ' ' + self.lastName();
     });

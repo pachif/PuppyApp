@@ -281,6 +281,8 @@
     <Content Include="Scripts\ownerViewModel.js" />
     <Content Include="wipe system data.sql" />
     <Content Include="Models\ModelDiagram.cd" />
+    <None Include="Properties\PublishProfiles\puppzy - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\puppzy - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dashboard.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
