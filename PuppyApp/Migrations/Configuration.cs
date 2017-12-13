@@ -1,13 +1,17 @@
+
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
+using PuppyApp.Models;
+
 namespace PuppyApp.Migrations {
-    using System;
-    using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using Models;
+    
     internal sealed class Configuration : DbMigrationsConfiguration<PuppyServiceContext> {
         public Configuration() {
             AutomaticMigrationsEnabled = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(PuppyServiceContext context) {

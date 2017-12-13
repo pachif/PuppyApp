@@ -71,6 +71,8 @@ namespace PuppyApp.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutOwner(int id, Owner owner)
         {
+            // this only to create new
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -106,9 +108,29 @@ namespace PuppyApp.Controllers
         [ResponseType(typeof(Owner))]
         public IHttpActionResult PostOwner(Owner owner)
         {
+            // POST is going to be reserved to update
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
+            }
+
+            // if does not exists return 404
+            if (!OwnerExists(owner.Id))
+            {
+                return NotFound();
+            }
+
+            var original = db.Owners.SingleOrDefault(o => o.Id == owner.Id);
+            foreach (var mascot in owner.Mascots)
+            {
+                var pet =
+                    original.Mascots.SingleOrDefault(
+                        p => String.Equals(p.Name, mascot.Name, StringComparison.InvariantCultureIgnoreCase));
+                if (pet!=null)
+                {
+                    original.Mascots.Remove(pet);
+                    original.Mascots.Add(pet);
+                }
             }
 
             db.Owners.Add(owner);

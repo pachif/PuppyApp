@@ -18,7 +18,7 @@
     <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css' rel='stylesheet' />
     <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css' rel='stylesheet' />
-    <link href="//www.fuelcdn.com/fuelux/3.15.0/css/fuelux.min.css" rel="stylesheet">
+    <link href="http://www.fuelcdn.com/fuelux/3.15.0/css/fuelux.min.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="fonts/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -33,7 +33,7 @@
         }
     </style>
 </head>
-<body>
+<body class="fuelux">
     <div id="wrapper">
         <!-- Navigation -->
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -372,9 +372,9 @@
                                     <div class="form-group">
                                         <label class="col-lg-2 control-label">Birth Date</label>
                                         <div class="col-lg-9">
-                                            <div class="datepicker fuelux" id="ptBirthDatepicker">
+                                            <div class="datepicker" id="ptBirthDatepicker">
                                                 <div class="input-group">
-                                                    <input class="form-control" type="text"  />
+                                                    <input class="form-control" type="text" id="ptBirthDatepickerInput" />
                                                     <div class="input-group-btn">
                                                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                                                             <span class="fa fw fa-calendar"></span>
@@ -846,7 +846,7 @@
     <script src="Scripts/bootstrap.js"></script>
     <script src="Scripts/knockout-3.4.0.debug.js"></script>
     <script src="Scripts/moment.js"></script>
-    <script src="//www.fuelcdn.com/fuelux/3.15.0/js/fuelux.js"></script>
+    <script src="http://www.fuelcdn.com/fuelux/3.15.0/js/fuelux.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
     <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js'></script>
@@ -966,7 +966,7 @@
             $(".navbar-ex1-collapse").collapse('toggle');
         }
 
-        function addPet(source) {
+        function addPet() {
 
             // Set Relevant Data
             var petName = $("#petName").val();
@@ -977,7 +977,7 @@
                 PetId: 0,
                 Photo: null,
                 Name: petName,
-                BirthDate: birthDate,
+                BirthDate: moment(birthDate).format("YYYY-MM-DDTHH:mm:ss"),
                 Specie : categ.text
             }
 
@@ -1010,7 +1010,7 @@
             $('#eventWhenDatepicker').datepicker({
                 retricted: [{ from: -Infinity, to: '01/01/1996' }]
             });
-
+            
             $('#saveEventButton').click(function (ev) {
                 $(this).button('loading');
                 // Collect form data
@@ -1035,12 +1035,11 @@
                     alert('Event Saved!');
                     // clear stuff
                     $('#eventTitle').val('');
-                    $('#saveEventButton').button('reset');
                     $('#eventWhenDatepicker').datepicker('setDate', new Date());
                 }, function () {
                     alert('Oh NO!');
-                    $('#saveEventButton').button('reset');
                 });
+                $('#saveEventButton').button('reset');
             });
 
             $('#ownerCombobox').combobox({
@@ -1097,14 +1096,35 @@
                 var maxDate = new Date();
                 maxDate.setFullYear(maxDate.getFullYear() + 15);
                 $('#ptBirthDatepicker').datepicker({
+                    formatDate : function(dateObject) {
+                        return moment(dateObject).format("YYYY-MM-DD HH:mm:ss");
+                    },
                     retricted: [
-                        { from: -Infinity, to: minDate.toDateString() },
-                        { from: maxDate.toDateString(), to: Infinity }
+                        { from: -Infinity, to: minDate },
+                        { from: maxDate, to: Infinity }
                     ]
                 });
             });
 
+            $('#saveOwnerDetailsButton').button('disable');
+            $('#saveOwnerDetailsButton').on('click', function() {
+                var $btn = $(this).button('loading');
+                // business logic...
+                dashVM.updateOwnerPets(null,
+                    function () {
 
+                        // clear stuff
+                        $("#petName").val('');
+                        $("#ptBirthDatepicker").datepicker('setDate', new Date());
+                        $("#ptSpecieCombobox").find("option:selected").text();
+                    },
+                    function() {
+                        alert('Oh NO!');
+                        $('#saveEventButton').button('reset');
+                    });
+                //////////-/////////
+                $btn.button('reset');
+            });
         }
 
         var dashVM = null;

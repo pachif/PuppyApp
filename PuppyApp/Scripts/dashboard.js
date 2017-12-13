@@ -9,8 +9,8 @@ var dashboardViewModel = function () {
     this.isPetComboDisabed = ko.observable(false);
     this.owners = ko.observableArray();
     this.filteredOwners = ko.observableArray();
-    this.selectedOwner = ko.observable();
-    this.pets = ko.observableArray();
+    this.selectedOwner = ko.observable(); // represents the id of the selected owner
+    this.pets = ko.observableArray(); // manipulated list of owner pets
     this.deseases = ko.observableArray();
     this.profile = ko.observable();
 
@@ -37,9 +37,29 @@ var dashboardViewModel = function () {
         self.pets.push(petData);
     };
 
-    this.updateOwnerPets = function(eventData, successCallback, failCallback) {
+    this.updateOwnerPets = function(profileData, successCallback, failCallback) {
         ///<summary>Updates the Owner pets</summary>
-        //TODO: Complete Here With Call to API to store the new pets to owner
+        ///<param name='profileData'>the DTO object</param>
+        ///<param name='successCallback'>method to call in success</param>
+        ///<param name='failCallback'>method to call in fail</param>
+        if (profileData == null) {
+            profileData = {
+                Id: self.selectedOwner(),
+                IdCard: 123, // this is fake does not show any congruence
+                Mascots: self.pets()
+            };
+        }
+        self.ajaxHelper('/api/owners/', 'POST', profileData)
+            .done(function(data) {
+                if (successCallback != null) {
+                    successCallback();
+                }
+            })
+            .fail(function(data) {
+                if (failCallback != null) {
+                    failCallback();
+                }
+            });
     };
 
     this.addNewEvent = function (eventData, successCallback, failCallback) {
